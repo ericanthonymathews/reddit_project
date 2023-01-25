@@ -13,6 +13,10 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    is_deleted = db.Column(db.Boolean, default=False)
+
+    # one to many relationships
+    posts = db.relationship("Post", back_populates="user")
 
     @property
     def password(self):
@@ -29,5 +33,6 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'is_deleted': self.is_deleted
         }
