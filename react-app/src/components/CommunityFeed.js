@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCommunityPostsThunk } from "../store/posts";
 import { getCommunityThunk } from "../store/communities";
 import PostCard from "./PostCard";
+import PostButton from "./PostButton";
 
 const CommunityFeed = () => {
   const communityPosts = useSelector((state) => state.posts.communityPosts);
   const community = useSelector((state) => state.communities.singleCommunity);
   const { communityId } = useParams();
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getCommunityPostsThunk(communityId));
     dispatch(getCommunityThunk(communityId));
@@ -26,6 +28,7 @@ const CommunityFeed = () => {
               <div className="community-feed-header-about">
                 {community.about}
               </div>
+              <PostButton />
             </div>
           )}
         </>

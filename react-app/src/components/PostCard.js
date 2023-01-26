@@ -18,7 +18,7 @@ const PostCard = ({ post, atHomePage = false }) => {
           <div className="post-community">r/{post.community_name}</div>
         )}
         <div className="post-maker">
-          Posted by u/{post.username} {post.created_at}
+          Posted by u/{post.username} on {post.created_at}
         </div>
       </div>
       <div className="post-title">{post.title}</div>
