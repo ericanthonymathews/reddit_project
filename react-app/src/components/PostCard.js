@@ -17,6 +17,7 @@ const PostCard = ({ post, atHomePage = false }) => {
   const navToPost = (e) => {
     e.preventDefault();
     dispatch(clearSinglePost());
+    dispatch(clearCommunity());
     history.push(`/communities/${post.community_id}/posts/${post.id}`);
   };
 
