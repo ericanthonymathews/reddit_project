@@ -1,9 +1,17 @@
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { clearCommunityPosts } from "../store/posts";
+import { clearCommunity } from "../store/communities";
 
 const PostCard = ({ post, atHomePage = false }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const navToCommunity = (e) => {
     e.preventDefault();
+    dispatch(clearCommunityPosts());
+    dispatch(clearCommunity());
+    // dispatch(getCommunityPostsThunk(post.community_id));
+    // dispatch(getCommunityThunk(post.community_id));
     history.push(`/communities/${post.community_id}`);
   };
   return (

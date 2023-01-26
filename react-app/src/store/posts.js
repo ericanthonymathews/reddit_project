@@ -1,6 +1,7 @@
 const LOAD_POSTS = "posts/LOAD_POSTS";
 const LOAD_COMMUNITY_POSTS = "posts/LOAD_COMMUNITY_POSTS";
 const ADD_POST = "posts/ADD_POST";
+const CLEAR_COMMUNITY_POSTS = "posts/CLEAR_COMMUNITY_POSTS";
 
 // ACTION CREATOR
 const loadPosts = (posts) => ({
@@ -16,6 +17,10 @@ const loadCommunityPosts = (posts) => ({
 const addPost = (post) => ({
   type: ADD_POST,
   post,
+});
+
+export const clearCommunityPosts = () => ({
+  type: CLEAR_COMMUNITY_POSTS,
 });
 
 // THUNK ACTION CREATOR
@@ -93,6 +98,13 @@ export default function reducer(state = initialState, action) {
       };
       newState.allPosts[action.post.id] = action.post;
       newState.communityPosts[action.post.id] = action.post;
+      return newState;
+    }
+    case CLEAR_COMMUNITY_POSTS: {
+      const newState = {
+        allPosts: { ...state.allPosts },
+        communityPosts: {},
+      };
       return newState;
     }
     default:
