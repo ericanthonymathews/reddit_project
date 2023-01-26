@@ -13,7 +13,7 @@ class Post(db.Model):
         add_prefix_for_prod("users.id")))
     community_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("communities.id")))
-    title = db.Column(db.String(250), nullable=False)
+    title = db.Column(db.String(300), nullable=False)
     body = db.Column(db.Text, nullable=False)
     is_deleted = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now())

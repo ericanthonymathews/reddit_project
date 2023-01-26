@@ -12,7 +12,7 @@ const Feed = () => {
   return (
     <div className="feed">
       {Object.values(allPosts).map((post) => (
-        <PostCard post={post} key={`feed-postcard-${post.id}`} />
+        <PostCard post={post} atHomePage={true} key={`feed-postcard-${post.id}`} />
       ))}
     </div>
   );

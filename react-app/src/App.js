@@ -9,6 +9,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
 import Feed from "./components/Feed";
+import CommunityFeed from "./components/CommunityFeed";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,6 +44,9 @@ function App() {
         </ProtectedRoute>
         <Route path="/" exact={true}>
           <Feed />
+        </Route>
+        <Route path="/communities/:communityId" exact={true}>
+          <CommunityFeed />
         </Route>
       </Switch>
     </BrowserRouter>
