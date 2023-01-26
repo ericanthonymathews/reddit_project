@@ -8,6 +8,10 @@ Create Date: 2023-01-25 08:53:25.894555
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
 
 # revision identifiers, used by Alembic.
 revision = 'a97ba624a1bb'
@@ -47,6 +51,10 @@ def upgrade():
                     )
     op.add_column('users', sa.Column(
         'is_deleted', sa.Boolean(), nullable=True))
+    if environment == "production":
+        op.execute(f"ALTER TABLE communities SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
