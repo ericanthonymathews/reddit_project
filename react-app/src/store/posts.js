@@ -2,6 +2,9 @@ const LOAD_POSTS = "posts/LOAD_POSTS";
 const LOAD_COMMUNITY_POSTS = "posts/LOAD_COMMUNITY_POSTS";
 const ADD_POST = "posts/ADD_POST";
 const CLEAR_COMMUNITY_POSTS = "posts/CLEAR_COMMUNITY_POSTS";
+const GET_SINGLE_POST_FROM_ALL_POSTS = "posts/GET_SINGLE_POST_FROM_ALL_POSTS";
+const GET_SINGLE_POST_FROM_COMMUNITY_POSTS =
+  "posts/GET_SINGLE_POST_FROM_COMMUNITY_POSTS";
 
 // ACTION CREATOR
 const loadPosts = (posts) => ({
@@ -21,6 +24,15 @@ const addPost = (post) => ({
 
 export const clearCommunityPosts = () => ({
   type: CLEAR_COMMUNITY_POSTS,
+});
+
+export const getSinglePostFromAllPosts = (id) => ({
+  type: GET_SINGLE_POST_FROM_ALL_POSTS,
+  id,
+});
+export const getSinglePostFromCommunityPosts = (id) => ({
+  type: GET_SINGLE_POST_FROM_COMMUNITY_POSTS,
+  id,
 });
 
 // THUNK ACTION CREATOR
@@ -67,7 +79,7 @@ export const createNewPostThunk =
     }
   };
 // INITIAL STATE
-const initialState = { allPosts: {}, communityPosts: {} };
+const initialState = { allPosts: {}, communityPosts: {}, singlePost: {} };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -75,6 +87,7 @@ export default function reducer(state = initialState, action) {
       const newState = {
         allPosts: {},
         communityPosts: { ...state.communityPosts },
+        singlePost: state.singlePost,
       };
       action.posts.forEach((post) => {
         newState.allPosts[post.id] = post;
@@ -85,6 +98,7 @@ export default function reducer(state = initialState, action) {
       const newState = {
         allPosts: { ...state.allPosts },
         communityPosts: {},
+        singlePost: state.singlePost,
       };
       action.posts.forEach((post) => {
         newState.communityPosts[post.id] = post;
@@ -95,6 +109,7 @@ export default function reducer(state = initialState, action) {
       const newState = {
         allPosts: { ...state.allPosts },
         communityPosts: { ...state.communityPosts },
+        singlePost: state.singlePost,
       };
       newState.allPosts[action.post.id] = action.post;
       newState.communityPosts[action.post.id] = action.post;
@@ -104,7 +119,26 @@ export default function reducer(state = initialState, action) {
       const newState = {
         allPosts: { ...state.allPosts },
         communityPosts: {},
+        singlePost: state.singlePost,
       };
+      return newState;
+    }
+    case GET_SINGLE_POST_FROM_ALL_POSTS: {
+      const newState = {
+        allPosts: { ...state.allPosts },
+        communityPosts: { ...state.communityPosts },
+        singlePost: {},
+      };
+      newState.singlePost = newState.allPosts[action.id];
+      return newState;
+    }
+    case GET_SINGLE_POST_FROM_COMMUNITY_POSTS: {
+      const newState = {
+        allPosts: { ...state.allPosts },
+        communityPosts: { ...state.communityPosts },
+        singlePost: {},
+      };
+      newState.singlePost = newState.communityPosts[action.id];
       return newState;
     }
     default:

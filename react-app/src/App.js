@@ -10,6 +10,7 @@ import User from "./components/User";
 import { authenticate } from "./store/session";
 import Feed from "./components/Feed";
 import CommunityFeed from "./components/CommunityFeed";
+import PostDetailsPage from "./components/PostDetailsPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -47,6 +48,9 @@ function App() {
         </Route>
         <Route path="/communities/:communityId" exact={true}>
           <CommunityFeed />
+        </Route>
+        <Route path="/communities/:communityId/posts/:postId" exact={true}>
+          <PostDetailsPage />
         </Route>
       </Switch>
     </BrowserRouter>
