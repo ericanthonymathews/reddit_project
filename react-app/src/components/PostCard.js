@@ -1,10 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {
-  clearCommunityPosts,
-  getSinglePostFromAllPosts,
-  getSinglePostFromCommunityPosts,
-} from "../store/posts";
+import { clearCommunityPosts, clearSinglePost } from "../store/posts";
 import { clearCommunity } from "../store/communities";
 
 const PostCard = ({ post, atHomePage = false }) => {
@@ -20,11 +16,7 @@ const PostCard = ({ post, atHomePage = false }) => {
 
   const navToPost = (e) => {
     e.preventDefault();
-    if (atHomePage) {
-      dispatch(getSinglePostFromAllPosts(post.id));
-    } else {
-      dispatch(getSinglePostFromCommunityPosts(post.id));
-    }
+    dispatch(clearSinglePost());
     history.push(`/communities/${post.community_id}/posts/${post.id}`);
   };
 

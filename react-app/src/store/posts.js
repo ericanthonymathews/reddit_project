@@ -1,15 +1,18 @@
 const LOAD_POSTS = "posts/LOAD_POSTS";
+const LOAD_SINGLE_POST = "posts/LOAD_SINGLE_POST";
 const LOAD_COMMUNITY_POSTS = "posts/LOAD_COMMUNITY_POSTS";
 const ADD_POST = "posts/ADD_POST";
 const CLEAR_COMMUNITY_POSTS = "posts/CLEAR_COMMUNITY_POSTS";
-const GET_SINGLE_POST_FROM_ALL_POSTS = "posts/GET_SINGLE_POST_FROM_ALL_POSTS";
-const GET_SINGLE_POST_FROM_COMMUNITY_POSTS =
-  "posts/GET_SINGLE_POST_FROM_COMMUNITY_POSTS";
-
+const CLEAR_SINGLE_POST = "posts/CLEAR_SINGLE_POST";
 // ACTION CREATOR
 const loadPosts = (posts) => ({
   type: LOAD_POSTS,
   posts,
+});
+
+const loadSinglePost = (post) => ({
+  type: LOAD_SINGLE_POST,
+  post,
 });
 
 const loadCommunityPosts = (posts) => ({
@@ -26,13 +29,8 @@ export const clearCommunityPosts = () => ({
   type: CLEAR_COMMUNITY_POSTS,
 });
 
-export const getSinglePostFromAllPosts = (id) => ({
-  type: GET_SINGLE_POST_FROM_ALL_POSTS,
-  id,
-});
-export const getSinglePostFromCommunityPosts = (id) => ({
-  type: GET_SINGLE_POST_FROM_COMMUNITY_POSTS,
-  id,
+export const clearSinglePost = () => ({
+  type: CLEAR_SINGLE_POST,
 });
 
 // THUNK ACTION CREATOR
@@ -41,6 +39,14 @@ export const getAllPostsThunk = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     await dispatch(loadPosts(data.posts));
+  }
+};
+
+export const getOnePostThunk = (id) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${id}`);
+  if (response.ok) {
+    const data = await response.json();
+    await dispatch(loadSinglePost(data));
   }
 };
 
@@ -94,11 +100,19 @@ export default function reducer(state = initialState, action) {
       });
       return newState;
     }
+    case LOAD_SINGLE_POST: {
+      const newState = {
+        allPosts: { ...state.allPosts },
+        communityPosts: { ...state.communityPosts },
+        singlePost: action.post,
+      };
+      return newState;
+    }
     case LOAD_COMMUNITY_POSTS: {
       const newState = {
         allPosts: { ...state.allPosts },
         communityPosts: {},
-        singlePost: state.singlePost,
+        singlePost: { ...state.singlePost },
       };
       action.posts.forEach((post) => {
         newState.communityPosts[post.id] = post;
@@ -109,7 +123,7 @@ export default function reducer(state = initialState, action) {
       const newState = {
         allPosts: { ...state.allPosts },
         communityPosts: { ...state.communityPosts },
-        singlePost: state.singlePost,
+        singlePost: { ...state.singlePost },
       };
       newState.allPosts[action.post.id] = action.post;
       newState.communityPosts[action.post.id] = action.post;
@@ -119,26 +133,16 @@ export default function reducer(state = initialState, action) {
       const newState = {
         allPosts: { ...state.allPosts },
         communityPosts: {},
-        singlePost: state.singlePost,
+        singlePost: { ...state.singlePost },
       };
       return newState;
     }
-    case GET_SINGLE_POST_FROM_ALL_POSTS: {
+    case CLEAR_SINGLE_POST: {
       const newState = {
         allPosts: { ...state.allPosts },
         communityPosts: { ...state.communityPosts },
         singlePost: {},
       };
-      newState.singlePost = newState.allPosts[action.id];
-      return newState;
-    }
-    case GET_SINGLE_POST_FROM_COMMUNITY_POSTS: {
-      const newState = {
-        allPosts: { ...state.allPosts },
-        communityPosts: { ...state.communityPosts },
-        singlePost: {},
-      };
-      newState.singlePost = newState.communityPosts[action.id];
       return newState;
     }
     default:

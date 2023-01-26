@@ -1,13 +1,19 @@
+import { useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { clearCommunityPosts } from "../store/posts";
-import { clearCommunity } from "../store/communities";
-
+import { clearCommunityPosts, getOnePostThunk } from "../store/posts";
+import { clearCommunity, getCommunityThunk } from "../store/communities";
 const PostDetailsPage = () => {
+  const { communityId, postId } = useParams();
   const community = useSelector((state) => state.communities.singleCommunity);
   const post = useSelector((state) => state.posts.singlePost);
   const history = useHistory();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOnePostThunk(postId));
+    dispatch(getCommunityThunk(communityId));
+  }, [dispatch, communityId, postId]);
 
   const navToCommunity = (e) => {
     e.preventDefault();

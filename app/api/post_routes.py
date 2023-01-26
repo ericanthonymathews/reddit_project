@@ -15,3 +15,14 @@ def posts():
         return {"posts": [post.to_dict() for post in posts]}
     else:
         return {"posts": []}
+
+# get post by id
+
+
+@post_routes.route('/<int:id>')
+def post(id):
+    post = Post.query.get(id)
+    if post:
+        return post.to_dict()
+    else:
+        return {}
