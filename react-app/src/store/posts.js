@@ -2,6 +2,7 @@ const LOAD_POSTS = "posts/LOAD_POSTS";
 const LOAD_SINGLE_POST = "posts/LOAD_SINGLE_POST";
 const LOAD_COMMUNITY_POSTS = "posts/LOAD_COMMUNITY_POSTS";
 const ADD_POST = "posts/ADD_POST";
+const EDIT_POST = "posts/EDIT_POST";
 const CLEAR_COMMUNITY_POSTS = "posts/CLEAR_COMMUNITY_POSTS";
 const CLEAR_SINGLE_POST = "posts/CLEAR_SINGLE_POST";
 // ACTION CREATOR
@@ -22,6 +23,11 @@ const loadCommunityPosts = (posts) => ({
 
 const addPost = (post) => ({
   type: ADD_POST,
+  post,
+});
+
+const editPost = (post) => ({
+  type: EDIT_POST,
   post,
 });
 
@@ -74,6 +80,63 @@ export const createNewPostThunk =
     if (response.ok) {
       const data = await response.json();
       dispatch(addPost(data));
+      return null;
+    } else if (response.status < 500) {
+      const data = await response.json();
+      if (data.errors) {
+        return data.errors;
+      }
+    } else {
+      return ["An error occured. Please try again"];
+    }
+  };
+
+export const editPostThunk =
+  (communityId, postId, edited_by, body) => async (dispatch) => {
+    const response = await fetch(
+      `/api/communities/${communityId}/posts/${postId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          body,
+          edited_by,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(editPost(data));
+      return null;
+    } else if (response.status < 500) {
+      const data = await response.json();
+      if (data.errors) {
+        return data.errors;
+      }
+    } else {
+      return ["An error occured. Please try again"];
+    }
+  };
+
+export const deletePostThunk =
+  (communityId, postId, edited_by, body) => async (dispatch) => {
+    const response = await fetch(`/api/posts/${postId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        body: "[ DELETED ]",
+        edited_by,
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(editPost(data));
       return null;
     } else if (response.status < 500) {
       const data = await response.json();
@@ -143,6 +206,16 @@ export default function reducer(state = initialState, action) {
         communityPosts: { ...state.communityPosts },
         singlePost: {},
       };
+      return newState;
+    }
+    case EDIT_POST: {
+      const newState = {
+        allPosts: { ...state.allPosts },
+        communityPosts: { ...state.communityPosts },
+        singlePost: action.post,
+      };
+      newState.allPosts[action.post.id] = action.post;
+      newState.communityPosts[action.post.id] = action.post;
       return newState;
     }
     default:
