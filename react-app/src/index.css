@@ -16,6 +16,11 @@ body {
 
 /* class styling */
 
+.feed {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .community-feed-header {
   color: whitesmoke;
   background-color: #1A1A1B;
@@ -29,14 +34,37 @@ body {
   margin: 1em;
   margin-left: 8em;
   padding-left: 0.5em;
+  border: #56565a 1px solid;
+  border-radius:0.1em;
+}
+
+.post-card:hover {
+  border: #76767a 1px solid;
+  cursor: pointer;
 }
 .post-header {
-  color:#56565a
+  color:#58585d;
+  padding-bottom: 1em;
+}
+
+.modular-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.post-community-link {
+  color: whitesmoke;
+  padding-right: 0.5em;
+}
+
+.post-community-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .post-title {
   font-size: 15pt;
-
+  padding-bottom: 1em;
 }
 
 .community-feed-header-header {
@@ -55,6 +83,13 @@ body {
   padding-left: 3.5em;
   font-weight: light;
   color: #56565a;
+}
+
+.home-feed {
+  padding-top: 5vw;
+  padding-left: 17vw;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 /* ID styling */

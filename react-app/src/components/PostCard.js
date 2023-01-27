@@ -24,13 +24,15 @@ const PostCard = ({ post, atHomePage = false }) => {
   return (
     <div className="post-card">
       <div className="post-header">
-        {atHomePage && (
-          <div className="post-community link" onClick={navToCommunity}>
-            r/{post.community_name}
+        <div className="modular-header">
+          {atHomePage && (
+            <div className="post-community-link" onClick={navToCommunity}>
+              r/{post.community_name}
+            </div>
+          )}
+          <div className="post-maker">
+            Posted by u/{post.username} on {post.created_at}
           </div>
-        )}
-        <div className="post-maker">
-          Posted by u/{post.username} on {post.created_at}
         </div>
       </div>
       <div className="post-title" onClick={navToPost}>

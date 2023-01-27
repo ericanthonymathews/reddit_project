@@ -10,9 +10,13 @@ const Feed = () => {
     dispatch(getAllPostsThunk());
   }, [dispatch]);
   return (
-    <div className="feed">
+    <div className="home-feed">
       {Object.values(allPosts).map((post) => (
-        <PostCard post={post} atHomePage={true} key={`feed-postcard-${post.id}`} />
+        <PostCard
+          post={post}
+          atHomePage={true}
+          key={`feed-postcard-${post.id}`}
+        />
       ))}
     </div>
   );
