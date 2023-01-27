@@ -1,9 +1,14 @@
 const LOAD_COMMUNITY = "communities/LOAD_COMMUNITY";
+const CLEAR_COMMUNITY = "communities/CLEAR_COMMUNITY";
 
 // ACTION CREATOR
 const loadCommunity = (community) => ({
   type: LOAD_COMMUNITY,
   community,
+});
+
+export const clearCommunity = () => ({
+  type: CLEAR_COMMUNITY,
 });
 
 // THUNK ACTION CREATOR
@@ -25,6 +30,12 @@ export default function reducer(state = initialState, action) {
         singleCommunity: {},
       };
       newState.singleCommunity = action.community;
+      return newState;
+    }
+    case CLEAR_COMMUNITY: {
+      const newState = {
+        singleCommunity: {},
+      };
       return newState;
     }
     default:

@@ -10,6 +10,8 @@ import User from "./components/User";
 import { authenticate } from "./store/session";
 import Feed from "./components/Feed";
 import CommunityFeed from "./components/CommunityFeed";
+import PostDetailsPage from "./components/PostDetailsPage";
+import DeleteForm from "./components/DeleteForm";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -47,6 +49,15 @@ function App() {
         </Route>
         <Route path="/communities/:communityId" exact={true}>
           <CommunityFeed />
+        </Route>
+        <Route path="/communities/:communityId/posts/:postId" exact={true}>
+          <PostDetailsPage />
+        </Route>
+        <Route
+          path="/communities/:communityId/posts/:postId/delete"
+          exact={true}
+        >
+          <DeleteForm />
         </Route>
       </Switch>
     </BrowserRouter>
