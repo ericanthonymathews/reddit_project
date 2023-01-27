@@ -10,19 +10,17 @@ const NavBar = () => {
   const user = useSelector((state) => state.session.user);
   return (
     <>
-      <nav>
-        <ul>
-          <NavLink to="/" exact={true} activeClassName="active">
-            Home
-          </NavLink>
-          <div id="auth-btns">
-            {!user && <LoginFormModal />}
-            {!user && <SignUpFormModal />}
-            {!user && <DemoButton />}
-            {user && <LogoutButton />}
-          </div>
-        </ul>
-      </nav>
+      <div id="nav-bar">
+        <NavLink to="/" exact={true} activeClassName="active">
+          Home
+        </NavLink>
+        <div id="auth-btns">
+          {!user && <LoginFormModal />}
+          {!user && <SignUpFormModal />}
+          {!user && <DemoButton />}
+          {user && <LogoutButton />}
+        </div>
+      </div>
       <div id="side-bar">
         <NavLink to="/" exact={true} activeClassName="active">
           Home

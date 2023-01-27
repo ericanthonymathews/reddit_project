@@ -29,9 +29,6 @@ const PostCard = ({ post, atHomePage = false }) => {
             r/{post.community_name}
           </div>
         )}
-        {!atHomePage && (
-          <div className="post-community">b/{post.community_name}</div>
-        )}
         <div className="post-maker">
           Posted by u/{post.username} on {post.created_at}
         </div>

@@ -1,1 +1,108 @@
 /* TODO Add site wide styles */
+
+/* Element styling*/
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: black;
+  color: whitesmoke;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 0;
+  width: 100vw;
+}
+
+/* class styling */
+
+.community-feed-header {
+  color: whitesmoke;
+  background-color: #1A1A1B;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.post-card {
+  background-color: #1A1A1B;
+  width: 45vw;
+  margin: 1em;
+  margin-left: 8em;
+  padding-left: 0.5em;
+}
+.post-header {
+  color:#56565a
+}
+
+.post-title {
+  font-size: 15pt;
+
+}
+
+.community-feed-header-header {
+  padding-left: 2em;
+  /* font-style: bolder; */
+  width: 78.6vw;
+  font-weight: bold;
+  font-size: 21pt;
+}
+.community-feed-header-about {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.community-feed-header-name {
+  padding-left: 3.5em;
+  font-weight: light;
+  color: #56565a;
+}
+
+/* ID styling */
+#community-feed {
+  padding-left: 17vw;
+  padding-top: 3.4vw;
+  width: 100vw;
+}
+
+#root {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100vw;
+}
+
+#nav-bar {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  background-color: #1A1A1B;
+  color: whitesmoke;
+  border-bottom:#56565a .5px solid;
+  border-top:#56565a 1px solid;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1vw;
+  padding-right: 1em;
+  height: 3em;
+  position: fixed;
+}
+
+#side-bar {
+  top: 3em;
+  display: flex;
+  color: whitesmoke;
+  background-color: #1A1A1B;
+  flex-direction: column;
+  height: 99vw;
+  width: 17vw;
+  position: fixed;
+}
+
+#community-feed {
+  display:flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 83vw;
+  height: 99vw;
+  justify-content: flex-start;
+}

@@ -74,16 +74,19 @@ const PostDetailsPage = () => {
         <div className="post-community link" onClick={navToCommunity}>
           r/{post.community_name}
         </div>
-        {user && Object.values(post).length > 0 && user.id === post.user_id && (
-          <>
-            <button className="edit-post-btn" onClick={startEdit}>
-              Edit
-            </button>
-            <button onClick={NavToDelete} id="delete-nav-btn">
-              Delete
-            </button>
-          </>
-        )}
+        {user &&
+          Object.values(post).length > 0 &&
+          !post.is_deleted &&
+          user.id === post.user_id && (
+            <>
+              <button className="edit-post-btn" onClick={startEdit}>
+                Edit
+              </button>
+              <button onClick={NavToDelete} id="delete-nav-btn">
+                Delete
+              </button>
+            </>
+          )}
         {showEdit && (
           <form onSubmit={editBody}>
             <div>
@@ -105,18 +108,16 @@ const PostDetailsPage = () => {
             <button type="submit">Submit</button>
           </form>
         )}
-        {!post.is_deleted && !showEdit && (
-          <div className="single-post-body">{post.body}</div>
-        )}
-        {post.edited_by && (
+        {!showEdit && <div className="single-post-body">{post.body}</div>}
+        {!post.is_deleted && post.edited_by && (
           <div>
             edited by {post.edited_by} on {post.updated_at}
           </div>
         )}
-        {post.is_deleted && !showEdit && (
+        {/* {post.is_deleted && !showEdit && (
           <div className="single-post-body">{post.body}</div>
-        )}
-        {post.edited_by && (
+        )} */}
+        {post.is_deleted && post.edited_by && (
           <div>
             deleted by {post.edited_by} on {post.updated_at}
           </div>
