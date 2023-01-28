@@ -33,6 +33,7 @@ function PostButton() {
   };
 
   const cancel = (e) => {
+    e.preventDefault();
     setTitle("");
     setBody("");
     setShowForm(false);

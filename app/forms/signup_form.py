@@ -20,8 +20,14 @@ def username_exists(form, field):
         raise ValidationError('Username is already in use.')
 
 
+def no_spaces_in_username(form, field):
+    username = field.data
+    if (' ' in username) == True:
+        raise ValidationError('Username can\'t contain spaces.')
+
+
 class SignUpForm(FlaskForm):
     username = StringField(
-        'username', validators=[DataRequired(), username_exists])
+        'username', validators=[DataRequired(), username_exists, no_spaces_in_username])
     email = StringField('email', validators=[DataRequired(), user_exists])
     password = StringField('password', validators=[DataRequired()])

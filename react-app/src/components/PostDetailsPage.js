@@ -65,70 +65,78 @@ const PostDetailsPage = () => {
 
   return (
     <>
-      <div className="single-post-details">
-        <div className="single-post-title">{post.title}</div>
-
-        <div className="post-maker">
-          Posted by u/{post.username} on {post.created_at} to
-        </div>
-        <div className="post-community link" onClick={navToCommunity}>
-          r/{post.community_name}
-        </div>
-        {user &&
-          Object.values(post).length > 0 &&
-          !post.is_deleted &&
-          user.id === post.user_id && (
-            <>
-              <button className="edit-post-btn" onClick={startEdit}>
-                Edit
-              </button>
-              <button onClick={NavToDelete} id="delete-nav-btn">
-                Delete
-              </button>
-            </>
-          )}
-        {showEdit && (
-          <form onSubmit={editBody}>
-            <div>
-              {errors.map((error, ind) => (
-                <div key={ind}>{error}</div>
-              ))}
+      <div id="single-post-details-page">
+        <div className="single-post-details">
+          <div className="modular-header">
+            <div className="post-community-link" onClick={navToCommunity}>
+              r/{post.community_name}
             </div>
-            <div>
-              <input
-                type="text"
-                name="body"
-                onChange={updateBody}
-                value={body}
-              ></input>
+            <div className="post-maker">
+              posted by u/{post.username} on {post.created_at}
             </div>
-            <button className="cancel-btn" onClick={cancel}>
-              Cancel
-            </button>
-            <button type="submit">Submit</button>
-          </form>
-        )}
-        {!showEdit && <div className="single-post-body">{post.body}</div>}
-        {!post.is_deleted && post.edited_by && (
-          <div>
-            edited by {post.edited_by} on {post.updated_at}
           </div>
-        )}
-        {/* {post.is_deleted && !showEdit && (
+          <div className="single-post-title">{post.title}</div>
+
+          {user &&
+            Object.values(post).length > 0 &&
+            !post.is_deleted &&
+            user.id === post.user_id && (
+              <>
+                <button className="edit-post-btn" onClick={startEdit}>
+                  Edit
+                </button>
+                <button onClick={NavToDelete} id="delete-nav-btn">
+                  <i className="fa-solid fa-trash"></i>
+                </button>
+              </>
+            )}
+          {showEdit && (
+            <form onSubmit={editBody}>
+              <div>
+                {errors.map((error, ind) => (
+                  <div key={ind}>{error}</div>
+                ))}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="body"
+                  onChange={updateBody}
+                  value={body}
+                ></input>
+              </div>
+              <button className="cancel-btn" onClick={cancel}>
+                Cancel
+              </button>
+              <button type="submit">Submit</button>
+            </form>
+          )}
+          {!showEdit && <div className="single-post-body">{post.body}</div>}
+          {!post.is_deleted && post.edited_by && (
+            <div>
+              * edited by {post.edited_by} on {post.updated_at}
+            </div>
+          )}
+          {/* {post.is_deleted && !showEdit && (
           <div className="single-post-body">{post.body}</div>
         )} */}
-        {post.is_deleted && post.edited_by && (
-          <div>
-            deleted by {post.edited_by} on {post.updated_at}
-          </div>
-        )}
-      </div>
-      <div className="community-feed-header">
-        <div className="single-post-feed-header-name" onClick={navToCommunity}>
-          r/{community.name}
+          {post.is_deleted && post.edited_by && (
+            <div>
+              * deleted by {post.edited_by} on {post.updated_at}
+            </div>
+          )}
         </div>
-        <div className="community-feed-header-header">{community.header}</div>
-        <div className="community-feed-header-about">{community.about}</div>
+        <div className="single-post-community-feed-header">
+          <div
+            className="single-post-feed-header-name"
+            onClick={navToCommunity}
+          >
+            r/{community.name}
+          </div>
+          <div className="single-post-community-feed-header-about">
+            {community.about}
+          </div>
+        </div>
       </div>
     </>
   );
