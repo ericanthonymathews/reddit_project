@@ -5,6 +5,7 @@ import LogoutButton from "./auth/LogoutButton";
 import SignUpFormModal from "./SignUpFormModal";
 import LoginFormModal from "./LoginFormModal";
 import DemoButton from "./DemoButton";
+import breadItLogo from "../static/breadItLogo.png";
 
 const NavBar = () => {
   const user = useSelector((state) => state.session.user);
@@ -12,9 +13,13 @@ const NavBar = () => {
   return (
     <>
       <div id="nav-bar">
-        <NavLink to="/" exact={true} activeClassName="active">
-          Home
-        </NavLink>
+        <img
+          src={breadItLogo}
+          alt="logo for homepage"
+          id="logo"
+          onClick={() => history.push("/")}
+        />
+
         <div id="auth-btns">
           {!user && <LoginFormModal />}
           {!user && <SignUpFormModal />}
