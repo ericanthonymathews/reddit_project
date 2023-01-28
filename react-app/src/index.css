@@ -98,7 +98,7 @@ body {
   background-color: #1A1A1B;
   padding: 0.5em;
   margin-right: 5em;
-  height: 23em;
+  /* height: 23em; */
   display: flex;
   flex-direction: column;
   border: #56565a 1px solid;
@@ -140,11 +140,68 @@ body {
   color: #56565a;
 }
 
+.error-text {
+  color: red;
+}
+
+/* modular styling */
+
+.nav-btn-btn {
+  color: whitesmoke;
+  background-color: black;
+  cursor: pointer;
+  width: 6em;
+  height: 3em;
+  border-radius: .5em;
+}
+
+.nav-btn-btn:hover {
+  background-color: #56565a2d;
+}
+.single-btn-btn {
+  color: whitesmoke;
+  background-color: black;
+  cursor: pointer;
+  width: 10em;
+  height: 3em;
+  border-radius: .5em;
+  align-self: right;
+}
+
+.single-btn-btn:hover {
+  background-color: #56565a2d;
+}
+.input-small {
+  border-radius: .25em;
+  color: whitesmoke;
+  background-color: black;
+  margin: 1em;
+  height: 2em;
+
+}
+.form-textarea {
+  color: whitesmoke;
+  background-color: black;
+  resize: none;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+
+}
 /* ID styling */
 
 #delete-prompt-container {
-  margin-left: 18em;
-  margin-top: 3.5em;
+  margin-left: 28em;
+  margin-top: 8em;
 }
 #single-post-details-page {
   margin-left: 18em;
@@ -206,4 +263,13 @@ body {
 #logo {
   height: 2em;
   width: 9em;
+  cursor: pointer;
+}
+
+#yes-delete {
+  margin: 2em;
+}
+#no-delete {
+  margin: 2em;
+  margin-left: 17em;
 }

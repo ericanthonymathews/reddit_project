@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { signUp } from "../../store/session";
 
 const SignUpForm = () => {
-  const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
-  const user = useSelector(state => state.session.user);
+  const [emailErrors, setEmailErrors] = useState([]);
+  const [passwordErrors, setPasswordErrors] = useState([]);
+  const [usernameErrors, setUsernameErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
@@ -17,7 +20,25 @@ const SignUpForm = () => {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
-        setErrors(data)
+        const eErrors = [];
+        const pErrors = [];
+        const uErrors = [];
+        data.forEach((error) => {
+          let fieldsAndErrors = error.split(":");
+          if (fieldsAndErrors[0] === "email ") {
+            eErrors.push(error);
+          }
+          if (fieldsAndErrors[0] === "password ") {
+            pErrors.push(error);
+          }
+          if (fieldsAndErrors[0] === "username ") {
+            uErrors.push(error);
+          }
+        });
+        setEmailErrors(eErrors);
+        setPasswordErrors(pErrors);
+        setUsernameErrors(uErrors);
+        // setErrors(data);
       }
     }
   };
@@ -39,54 +60,81 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to="/" />;
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
+    <form onSubmit={onSignUp} class="flex-column">
+      {/* <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
+      </div> */}
+      <div>
+        {usernameErrors.map((error, ind) => (
+          <div key={`username-${ind}`} className="error-text">
+            {error}
+          </div>
+        ))}
       </div>
       <div>
-        <label>User Name</label>
         <input
-          type='text'
-          name='username'
+          className="input-small"
+          placeholder="Username(no_spaces)*"
+          type="text"
+          name="username"
           onChange={updateUsername}
           value={username}
         ></input>
       </div>
       <div>
-        <label>Email</label>
+        {emailErrors.map((error, ind) => (
+          <div key={`email-${ind}`} className="error-text">
+            {error}
+          </div>
+        ))}
+      </div>
+      <div>
         <input
-          type='text'
-          name='email'
+          className="input-small"
+          type="text"
+          name="email"
+          placeholder="Email*"
           onChange={updateEmail}
           value={email}
         ></input>
       </div>
       <div>
-        <label>Password</label>
+        <div>
+          {passwordErrors.map((error, ind) => (
+            <div key={`password-${ind}`} className="error-text">
+              {error}
+            </div>
+          ))}
+        </div>
         <input
-          type='password'
-          name='password'
+          className="input-small"
+          placeholder="Password*"
+          type="password"
+          name="password"
           onChange={updatePassword}
           value={password}
         ></input>
       </div>
       <div>
-        <label>Repeat Password</label>
         <input
-          type='password'
-          name='repeat_password'
+          className="input-small"
+          type="password"
+          placeholder="Repeat Password*"
+          name="repeat_password"
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <button type="submit" className="single-btn-btn">
+        Sign Up
+      </button>
     </form>
   );
 };
