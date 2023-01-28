@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { login } from '../../store/session';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { login } from "../../store/session";
 
 const LoginForm = () => {
-  const [errors, setErrors] = useState([]);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const user = useSelector(state => state.session.user);
+  // const [errors, setErrors] = useState([]);
+  const [emailErrors, setEmailErrors] = useState([]);
+  const [passwordErrors, setPasswordErrors] = useState([]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
-      setErrors(data);
+      const eErrors = [];
+      const pErrors = [];
+      data.forEach((error) => {
+        let fieldsAndErrors = error.split(":");
+        if (fieldsAndErrors[0] === "email ") {
+          eErrors.push(error);
+        }
+        if (fieldsAndErrors[0] === "password ") {
+          pErrors.push(error);
+        }
+      });
+      setEmailErrors(eErrors);
+      setPasswordErrors(pErrors);
+      // setErrors(data);
     }
   };
 
@@ -27,37 +42,53 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to="/" />;
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
+    <form onSubmit={onLogin} class="flex-column">
+      {/* <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
+      </div> */}
+      <div>
+        {emailErrors.map((error, ind) => (
+          <div key={`email-${ind}`} className="error-text">
+            {error}
+          </div>
+        ))}
       </div>
       <div>
-        <label htmlFor='email'>Email</label>
         <input
-          name='email'
-          type='text'
-          placeholder='Email'
+          className="input-small"
+          name="email"
+          type="text"
+          placeholder="Email*"
           value={email}
           onChange={updateEmail}
         />
       </div>
       <div>
-        <label htmlFor='password'>Password</label>
+        {passwordErrors.map((error, ind) => (
+          <div key={`password-${ind}`} className="error-text">
+            {error}
+          </div>
+        ))}
+      </div>
+      <div>
         <input
-          name='password'
-          type='password'
-          placeholder='Password'
+          className="input-small"
+          name="password"
+          type="password"
+          placeholder="Password*"
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
       </div>
+      <button type="submit" className="single-btn-btn">
+        Login
+      </button>
     </form>
   );
 };

@@ -23,8 +23,12 @@ const DeleteForm = () => {
         When you delete your Post, only the content of the post will be erased.
         Are you sure you want to delete this post?
       </div>
-      <button onClick={no}>No</button>
-      <button onClick={yes}>Yes</button>
+      <button onClick={no} id="no-delete" className="nav-btn-btn">
+        Cancel
+      </button>
+      <button onClick={yes} id="yes-delete" className="nav-btn-btn">
+        Delete
+      </button>
     </div>
   );
 };

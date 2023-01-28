@@ -66,75 +66,91 @@ const PostDetailsPage = () => {
   return (
     <>
       <div id="single-post-details-page">
-        <div className="single-post-details">
-          <div className="modular-header">
-            <div className="post-community-link" onClick={navToCommunity}>
-              r/{post.community_name}
+        <div className="flex-container">
+          <div className="single-post-details">
+            <div className="modular-header">
+              <div className="post-community-link" onClick={navToCommunity}>
+                r/{post.community_name}
+              </div>
+              <div className="post-maker">
+                posted by u/{post.username} on {post.created_at}
+              </div>
             </div>
-            <div className="post-maker">
-              posted by u/{post.username} on {post.created_at}
-            </div>
-          </div>
-          <div className="single-post-title">{post.title}</div>
-
-          {user &&
-            Object.values(post).length > 0 &&
-            !post.is_deleted &&
-            user.id === post.user_id && (
-              <>
-                <button className="edit-post-btn" onClick={startEdit}>
-                  Edit
+            {user &&
+              Object.values(post).length > 0 &&
+              !post.is_deleted &&
+              user.id === post.user_id && (
+                <>
+                  <div className="flex-row">
+                    <button className="nav-btn-btn" onClick={startEdit}>
+                      Edit
+                    </button>
+                    <button
+                      onClick={NavToDelete}
+                      id="delete-nav-btn"
+                      className="nav-btn-btn"
+                    >
+                      <i className="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </>
+              )}
+            <div className="single-post-title">{post.title}</div>
+            {showEdit && (
+              <form onSubmit={editBody}>
+                <div>
+                  {errors.map((error, ind) => (
+                    <div key={ind} className="error-text">
+                      {error}
+                    </div>
+                  ))}
+                </div>
+                <div>
+                  <textarea
+                    rows="10"
+                    cols="64"
+                    className="form-textarea"
+                    type="text"
+                    name="body"
+                    onChange={updateBody}
+                    value={body}
+                  ></textarea>
+                </div>
+                <button className="nav-btn-btn" onClick={cancel}>
+                  Cancel
                 </button>
-                <button onClick={NavToDelete} id="delete-nav-btn">
-                  <i className="fa-solid fa-trash"></i>
+                <button type="submit" className="nav-btn-btn">
+                  Submit
                 </button>
-              </>
+              </form>
             )}
-          {showEdit && (
-            <form onSubmit={editBody}>
+            {!showEdit && <div className="single-post-body">{post.body}</div>}
+            {!post.is_deleted && post.edited_by && (
               <div>
-                {errors.map((error, ind) => (
-                  <div key={ind}>{error}</div>
-                ))}
+                * edited by {post.edited_by} on {post.updated_at}
               </div>
-              <div>
-                <input
-                  type="text"
-                  name="body"
-                  onChange={updateBody}
-                  value={body}
-                ></input>
-              </div>
-              <button className="cancel-btn" onClick={cancel}>
-                Cancel
-              </button>
-              <button type="submit">Submit</button>
-            </form>
-          )}
-          {!showEdit && <div className="single-post-body">{post.body}</div>}
-          {!post.is_deleted && post.edited_by && (
-            <div>
-              * edited by {post.edited_by} on {post.updated_at}
-            </div>
-          )}
-          {/* {post.is_deleted && !showEdit && (
+            )}
+            {/* {post.is_deleted && !showEdit && (
           <div className="single-post-body">{post.body}</div>
         )} */}
-          {post.is_deleted && post.edited_by && (
-            <div>
-              * deleted by {post.edited_by} on {post.updated_at}
-            </div>
-          )}
-        </div>
-        <div className="single-post-community-feed-header">
-          <div
-            className="single-post-feed-header-name"
-            onClick={navToCommunity}
-          >
-            r/{community.name}
+            {post.is_deleted && post.edited_by && (
+              <div>
+                * deleted by {post.edited_by} on {post.updated_at}
+              </div>
+            )}
           </div>
-          <div className="single-post-community-feed-header-about">
-            {community.about}
+        </div>
+        <div className="flex-container">
+          <div className="single-post-community-feed-header">
+            <div
+              className="single-post-feed-header-name"
+              onClick={navToCommunity}
+            >
+              r/{community.name}
+            </div>
+            <div className="single-post-community-feed-header-about">
+              {community.about}
+            </div>
           </div>
         </div>
       </div>

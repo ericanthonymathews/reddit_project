@@ -12,6 +12,8 @@ function PostButton() {
   const [showForm, setShowForm] = useState(false);
   const user = useSelector((state) => state.session.user);
   // FORM DATA STATE
+  const [titleErrors, setTitleErrors] = useState([]);
+  const [bodyErrors, setBodyErrors] = useState([]);
   const [errors, setErrors] = useState([]);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -24,6 +26,19 @@ function PostButton() {
     e.preventDefault();
     const data = await dispatch(createNewPostThunk(communityId, title, body));
     if (data) {
+      const tErrors = [];
+      const bErrors = [];
+      data.forEach((error) => {
+        let fieldsAndErrors = error.split(":");
+        if (fieldsAndErrors[0] === "title ") {
+          tErrors.push(error);
+        }
+        if (fieldsAndErrors[0] === "body ") {
+          bErrors.push(error);
+        }
+      });
+      setTitleErrors(tErrors);
+      setBodyErrors(bErrors);
       setErrors(data);
     } else {
       setTitle("");
@@ -50,7 +65,11 @@ function PostButton() {
   if (!user) {
     return (
       <>
-        <button onClick={() => setShowModal(true)} id="add-post-btn">
+        <button
+          onClick={() => setShowModal(true)}
+          id="add-post-btn"
+          className="nav-btn-btn"
+        >
           Post
         </button>
         {showModal && (
@@ -62,40 +81,62 @@ function PostButton() {
     );
   } else if (!showForm) {
     return (
-      <button onClick={activateForm} id="add-post-btn">
+      <button onClick={activateForm} id="add-post-btn" className="nav-btn-btn">
         Post
       </button>
     );
   } else {
     return (
       <form onSubmit={createPost}>
-        <div>
+        {/* <div>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
-        </div>
+        </div> */}
         <div>
-          <label>Title</label>
-          <input
-            type="text"
+          {titleErrors.map((error, ind) => (
+            <div key={`title-${ind}`} className="error-text">
+              {error}
+            </div>
+          ))}
+        </div>
+        <label>Title*</label>
+        <div>
+          <textarea
+            // type="textarea"
+            rows="4"
+            cols="80"
+            className="form-textarea"
             name="title"
             onChange={updateTitle}
             value={title}
-          ></input>
+          ></textarea>
         </div>
         <div>
-          <label>Body</label>
-          <input
-            type="text"
+          {bodyErrors.map((error, ind) => (
+            <div key={`body-${ind}`} className="error-text">
+              {error}
+            </div>
+          ))}
+        </div>
+        <label>Body*</label>
+        <div>
+          <textarea
+            // type="text"
             name="body"
+            rows="8"
+            cols="80"
+            className="form-textarea"
             onChange={updateBody}
             value={body}
-          ></input>
+          ></textarea>
         </div>
-        <button className="cancel-btn" onClick={cancel}>
+        <button className="nav-btn-btn" onClick={cancel}>
           Cancel
         </button>
-        <button type="submit">Submit</button>
+        <button type="submit" className="nav-btn-btn">
+          Submit
+        </button>
       </form>
     );
   }
