@@ -19,26 +19,31 @@ const CommunityFeed = () => {
   return (
     <>
       <>
-        <>
-          {Object.values(community).length > 0 && (
-            <div className="community-feed-header">
-              <div className="community-feed-header-header">
-                {community.header}
+        <div id="community-feed">
+          <>
+            {Object.values(community).length > 0 && (
+              <div className="community-feed-header">
+                <div className="community-feed-header-header">
+                  {community.header}
+                </div>
+                <div className="community-feed-header-name">
+                  r/{community.name}
+                </div>
+                <div className="community-feed-header-about">
+                  {community.about}
+                </div>
+                <PostButton />
               </div>
-              <div className="community-feed-header-about">
-                {community.about}
-              </div>
-              <PostButton />
+            )}
+          </>
+          {Object.values(communityPosts).length > 0 && (
+            <div className="feed">
+              {Object.values(communityPosts).map((post) => (
+                <PostCard post={post} key={`feed-postcard-${post.id}`} />
+              ))}
             </div>
           )}
-        </>
-        {Object.values(communityPosts).length > 0 && (
-          <div className="feed">
-            {Object.values(communityPosts).map((post) => (
-              <PostCard post={post} key={`feed-postcard-${post.id}`} />
-            ))}
-          </div>
-        )}
+        </div>
       </>
     </>
   );

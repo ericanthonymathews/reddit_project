@@ -33,6 +33,7 @@ function PostButton() {
   };
 
   const cancel = (e) => {
+    e.preventDefault();
     setTitle("");
     setBody("");
     setShowForm(false);
@@ -49,7 +50,9 @@ function PostButton() {
   if (!user) {
     return (
       <>
-        <button onClick={() => setShowModal(true)}>Post</button>
+        <button onClick={() => setShowModal(true)} id="add-post-btn">
+          Post
+        </button>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <LoginForm setShowModal={setShowModal} />
@@ -58,7 +61,11 @@ function PostButton() {
       </>
     );
   } else if (!showForm) {
-    return <button onClick={activateForm}>Post</button>;
+    return (
+      <button onClick={activateForm} id="add-post-btn">
+        Post
+      </button>
+    );
   } else {
     return (
       <form onSubmit={createPost}>

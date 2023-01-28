@@ -1,32 +1,40 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
 import SignUpFormModal from "./SignUpFormModal";
 import LoginFormModal from "./LoginFormModal";
 import DemoButton from "./DemoButton";
+import breadItLogo from "../static/breadItLogo.png";
 
 const NavBar = () => {
   const user = useSelector((state) => state.session.user);
+  const history = useHistory();
   return (
     <>
-      <nav>
-        <ul>
-          <NavLink to="/" exact={true} activeClassName="active">
-            Home
-          </NavLink>
-          <div id="auth-btns">
-            {!user && <LoginFormModal />}
-            {!user && <SignUpFormModal />}
-            {!user && <DemoButton />}
-            {user && <LogoutButton />}
-          </div>
-        </ul>
-      </nav>
+      <div id="nav-bar">
+        <img
+          src={breadItLogo}
+          alt="logo for homepage"
+          id="logo"
+          onClick={() => history.push("/")}
+        />
+
+        <div id="auth-btns">
+          {!user && <LoginFormModal />}
+          {!user && <SignUpFormModal />}
+          {!user && <DemoButton />}
+          {user && <LogoutButton />}
+        </div>
+      </div>
       <div id="side-bar">
-        <NavLink to="/" exact={true} activeClassName="active">
+        <div className="home-btn" onClick={() => history.push("/")}>
+          <i
+            class="fa-solid fa-house"
+            style={{ color: "#b3b3b3", margin: "0px 10px" }}
+          ></i>
           Home
-        </NavLink>
+        </div>
       </div>
     </>
   );
