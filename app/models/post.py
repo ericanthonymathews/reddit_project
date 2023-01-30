@@ -23,6 +23,7 @@ class Post(db.Model):
     # create one to many relationships
     user = db.relationship("User", back_populates='posts')
     community = db.relationship("Community", back_populates='posts')
+    comments = db.relationship("Comment", back_populates="post")
 
     def to_dict(self):
         return {
@@ -32,6 +33,7 @@ class Post(db.Model):
             'user_is_deleted': self.user.is_deleted,
             'community_id': self.community_id,
             'community_name': self.community.name,
+            "comments": [com.to_dict() for com in self.comments],
             'title': self.title,
             'body': self.body,
             'is_deleted': self.is_deleted,

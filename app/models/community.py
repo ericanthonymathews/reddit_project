@@ -13,11 +13,13 @@ class Community(db.Model):
     name = db.Column(db.String(50), nullable=False, unique=True)
     header = db.Column(db.String(60), nullable=False)
     about = db.Column(db.Text, nullable=False)
+    edited_by = db.Column(db.String(50))
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
     ## one to many relationships
     posts = db.relationship("Post", back_populates="community")
+
 
     def to_dict(self):
         return {
@@ -26,5 +28,6 @@ class Community(db.Model):
             'header': self.header,
             'about': self.about,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'edited_by': self.edited_by,
         }
