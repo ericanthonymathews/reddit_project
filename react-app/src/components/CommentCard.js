@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { editCommentThunk } from "../store/posts";
 import DeleteCommentModal from "./DeleteCommentModal";
 
-const CommentCard = ({ comment }) => {
+const CommentCard = ({ comment, post }) => {
   const dispatch = useDispatch();
   const [showEdit, setShowEdit] = useState(false);
   const [errors, setErrors] = useState([]);
@@ -61,6 +61,11 @@ const CommentCard = ({ comment }) => {
         user &&
         user.id === comment.user_id &&
         !comment.is_deleted && <DeleteCommentModal comment={comment} />}
+      {comment.user_id === post.user_id && (
+        <div className="comment-is-op">
+          <i class="fa-solid fa-star"></i> OP
+        </div>
+      )}
       {showEdit && (
         <form onSubmit={editDescription}>
           <div>

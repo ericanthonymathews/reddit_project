@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CommentCard from "./CommentCard";
+import CommentForm from "./CommentFormModal";
 import {
   clearCommunityPosts,
   getOnePostThunk,
@@ -149,9 +150,11 @@ const PostDetailsPage = () => {
                 post.comments.map((comment) => (
                   <CommentCard
                     comment={comment}
+                    post={post}
                     key={`commentcard-${comment.id}`}
                   />
                 ))}
+              <CommentForm />
             </div>
           </div>
         </div>

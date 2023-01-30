@@ -120,7 +120,11 @@ body {
 }
 .single-post-title {
   font-size: 15pt;
-  padding-bottom: 1em;
+  padding: 1em;
+}
+
+.single-post-body {
+  padding: 1em;
 }
 
 .single-post-community-feed-header {
@@ -175,10 +179,25 @@ body {
   padding-bottom: .5em;
 }
 
+.fa-star {
+  color: yellow
+}
+.comment-is-op {
+  padding: 1em;
+  font-size: 10pt;
+}
+
 .comment-header {
-    /* padding-left: 3.5em; */
-    font-weight: light;
-    color: #56565a;
+  font-weight: light;
+  color: #56565a;
+}
+
+.comment-description {
+  padding: 1em;
+}
+
+.comment-maker {
+  font-size: 10pt;
 }
 
 
@@ -337,4 +356,11 @@ body {
 
 #comment-no-delete {
   margin: 1em;
+}
+
+#comment-btn-btn {
+  width: 9em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-right: 1em;
 }
