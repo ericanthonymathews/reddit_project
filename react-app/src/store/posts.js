@@ -3,6 +3,7 @@ const LOAD_SINGLE_POST = "posts/LOAD_SINGLE_POST";
 const LOAD_COMMUNITY_POSTS = "posts/LOAD_COMMUNITY_POSTS";
 const ADD_POST = "posts/ADD_POST";
 const EDIT_POST = "posts/EDIT_POST";
+const EDIT_POST_COMMENT = "posts/EDIT_POST_COMMENT";
 const CLEAR_COMMUNITY_POSTS = "posts/CLEAR_COMMUNITY_POSTS";
 const CLEAR_SINGLE_POST = "posts/CLEAR_SINGLE_POST";
 // ACTION CREATOR
@@ -28,6 +29,11 @@ const addPost = (post) => ({
 
 const editPost = (post) => ({
   type: EDIT_POST,
+  post,
+});
+
+const editPostComment = (post) => ({
+  type: EDIT_POST_COMMENT,
   post,
 });
 
@@ -117,7 +123,60 @@ export const editPostThunk =
         return data.errors;
       }
     } else {
-      return ["An error occured. Please try again"];
+      return ["An error occurred. Please try again"];
+    }
+  };
+
+export const editCommentThunk =
+  (commentId, description, edited_by) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${commentId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        description,
+        edited_by,
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(editPostComment(data));
+      return null;
+    } else if (response.status < 500) {
+      const data = response.json();
+      if (data.errors) {
+        return data.errors;
+      }
+    } else {
+      return ["An error occurred. Please try again"];
+    }
+  };
+export const deleteCommentThunk =
+  (commentId, edited_by) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${commentId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        description: "[ DELETED ]",
+        edited_by,
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(editPostComment(data));
+      return null;
+    } else if (response.status < 500) {
+      const data = response.json();
+      if (data.errors) {
+        return data.errors;
+      }
+    } else {
+      return ["An error occurred. Please try again"];
     }
   };
 
@@ -216,6 +275,14 @@ export default function reducer(state = initialState, action) {
       };
       newState.allPosts[action.post.id] = action.post;
       newState.communityPosts[action.post.id] = action.post;
+      return newState;
+    }
+    case EDIT_POST_COMMENT: {
+      const newState = {
+        allPosts: { ...state.allPosts },
+        communityPosts: { ...state.communityPosts },
+        singlePost: action.post,
+      };
       return newState;
     }
     default:

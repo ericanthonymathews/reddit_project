@@ -38,6 +38,10 @@ const PostCard = ({ post, atHomePage = false }) => {
       <div className="post-title" onClick={navToPost}>
         {post.title}
       </div>
+      <div className="post-card-comments">
+        <i className="fa-regular fa-message"></i> {post.comments.length}{" "}
+        Comments
+      </div>
     </div>
   );
 };

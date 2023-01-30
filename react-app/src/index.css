@@ -3,6 +3,10 @@
 /* Element styling*/
 * {
   box-sizing: border-box;
+  font-family: verdana,
+    arial,
+    helvetica,
+    sans-serif;
 }
 body {
   background-color: black;
@@ -47,6 +51,14 @@ body {
   padding-bottom: 1em;
 }
 
+.post-card-comments {
+  color: #58585d;
+  padding-top: .2em;
+  padding-bottom: .2em;
+}
+
+
+
 .modular-header {
   display: flex;
   flex-direction: row;
@@ -55,6 +67,7 @@ body {
 .post-community-link {
   color: whitesmoke;
   padding-right: 0.5em;
+  font-size: 10pt;
 }
 
 .post-community-link:hover {
@@ -84,6 +97,7 @@ body {
   font-weight: light;
   color: #56565a;
 }
+
 
 .home-feed {
   padding-top: 5vw;
@@ -117,6 +131,10 @@ body {
   border: #56565a 1px solid;
   border-radius: 0.1em;
 }
+
+.single-post-community-feed-header-about {
+  font-size: 10pt;
+}
 .single-post-feed-header-name {
   font-size: 15pt;
   padding-bottom: 2em;
@@ -138,11 +156,31 @@ body {
 .post-maker {
   font-weight: light;
   color: #56565a;
+  font-size: 10pt;
 }
 
 .error-text {
   color: red;
 }
+
+.comment-component-container {
+  border-top: #76767a 1px solid;
+}
+
+.comment-card {
+  border: #76767a 1px solid;
+  border-radius: .25em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+  padding-bottom: .5em;
+}
+
+.comment-header {
+    /* padding-left: 3.5em; */
+    font-weight: light;
+    color: #56565a;
+}
+
 
 /* modular styling */
 
@@ -150,9 +188,9 @@ body {
   color: whitesmoke;
   background-color: black;
   cursor: pointer;
-  width: 6em;
-  height: 3em;
-  border-radius: .5em;
+  width: 8em;
+  height: 2.5em;
+  border-radius:  2em;
 }
 
 .nav-btn-btn:hover {
@@ -164,6 +202,7 @@ body {
   cursor: pointer;
   width: 10em;
   height: 3em;
+  margin: .5em;
   border-radius: .5em;
   align-self: right;
 }
@@ -232,8 +271,8 @@ body {
   border-top:#56565a 1px solid;
   justify-content: space-between;
   align-items: center;
-  padding-left: 1vw;
-  padding-right: 1em;
+  padding-left: 1.2vw;
+  padding-right: 1.2vw;
   height: 3em;
   position: fixed;
 }
@@ -267,9 +306,35 @@ body {
 }
 
 #yes-delete {
+  background-color: red;
   margin: 2em;
 }
 #no-delete {
   margin: 2em;
   margin-left: 17em;
+}
+
+#comment-delete-prompt-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#comment-delete-prompt-label {
+  padding-bottom: 1em;
+  padding-top: 1em;
+}
+
+#comment-delete-prompt-message {
+  width: 30em;
+  padding: 1em;
+}
+
+#comment-yes-delete {
+  margin: 1em;
+  background-color: red;
+}
+
+#comment-no-delete {
+  margin: 1em;
 }

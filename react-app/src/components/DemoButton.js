@@ -10,8 +10,8 @@ const DemoButton = () => {
   };
 
   return (
-    <button className="nav-btn-btn" onClick={submit}>
-      Demo
+    <button className="single-btn-btn" onClick={submit}>
+      Demo User
     </button>
   );
 };
