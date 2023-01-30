@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Post
+from app.models import db, Post, Comment
 from flask_login import login_required, current_user
-from app.forms import EditPostForm
+from app.forms import EditPostForm, AddCommentForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from datetime import datetime
 
@@ -29,6 +29,24 @@ def post(id):
         return post.to_dict()
     else:
         return {}
+
+@post_routes.route("/<int:id>", methods=["POST"])
+@login_required
+def add_post_comment(id):
+
+    form = AddCommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+      comment = Comment(
+        user_id=current_user.id,
+        description=form.data['description'],
+        post_id=form.data['post_id'],
+      )
+      db.session.add(comment)
+      db.session.commit()
+      updated_post = Post.query.get(id)
+      return updated_post.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @post_routes.route("/<int:id>", methods=["PUT"])

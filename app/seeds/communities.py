@@ -6,7 +6,7 @@ def seed_communities():
         user_id=2,
         name='WhySoSourDough',
         header="Why So Sourdough?",
-        about="You know exactly what we're talkin 'bout: succinct summaries of your bread-related woes. You can ask about anything sourdough-related as well. We're commited to creating a safe place to talk about sourdough starters, levains, literally anything. Number one rule is patience."
+        about="You know exactly what we're talkin' 'bout: succinct summaries of your bread-related woes. You can ask about anything sourdough-related as well. We're committed to creating a safe place to talk about sourdough starters, levains, literally anything. Number one rule is patience."
     )
     aita = Community(
         user_id=2,

@@ -3,9 +3,11 @@ const LOAD_SINGLE_POST = "posts/LOAD_SINGLE_POST";
 const LOAD_COMMUNITY_POSTS = "posts/LOAD_COMMUNITY_POSTS";
 const ADD_POST = "posts/ADD_POST";
 const EDIT_POST = "posts/EDIT_POST";
+const ADD_POST_COMMENT = "/posts/ADD_POST_COMMENT";
 const EDIT_POST_COMMENT = "posts/EDIT_POST_COMMENT";
 const CLEAR_COMMUNITY_POSTS = "posts/CLEAR_COMMUNITY_POSTS";
 const CLEAR_SINGLE_POST = "posts/CLEAR_SINGLE_POST";
+
 // ACTION CREATOR
 const loadPosts = (posts) => ({
   type: LOAD_POSTS,
@@ -29,6 +31,11 @@ const addPost = (post) => ({
 
 const editPost = (post) => ({
   type: EDIT_POST,
+  post,
+});
+
+const addComment = (post) => ({
+  type: ADD_POST_COMMENT,
   post,
 });
 
@@ -126,6 +133,31 @@ export const editPostThunk =
       return ["An error occurred. Please try again"];
     }
   };
+
+export const addCommentThunk = (post_id, description) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${post_id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      description,
+      post_id,
+    }),
+  }); //////// NEED TO MAKE ROUTE, then handle data
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(addComment(data));
+    return null;
+  } else if (response.status < 500) {
+    const data = response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["an error occurred. Please try again"];
+  }
+};
 
 export const editCommentThunk =
   (commentId, description, edited_by) => async (dispatch) => {
@@ -264,6 +296,14 @@ export default function reducer(state = initialState, action) {
         allPosts: { ...state.allPosts },
         communityPosts: { ...state.communityPosts },
         singlePost: {},
+      };
+      return newState;
+    }
+    case ADD_POST_COMMENT: {
+      const newState = {
+        allPosts: { ...state.allPosts },
+        communityPosts: { ...state.communityPosts },
+        singlePost: action.post,
       };
       return newState;
     }
