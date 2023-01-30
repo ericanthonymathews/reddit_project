@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import CommentCard from "./CommentCard";
 import {
   clearCommunityPosts,
   getOnePostThunk,
@@ -51,7 +52,12 @@ const PostDetailsPage = () => {
       editPostThunk(community.id, post.id, user.username, body)
     );
     if (data) {
-      setErrors(data);
+      let bErrors = [];
+      data.forEach((error) => {
+        let fieldsAndErrors = error.split(":");
+        bErrors.push(fieldsAndErrors[1]);
+      });
+      setErrors(bErrors);
     } else {
       setBody(post.body);
       setShowEdit(false);
@@ -138,6 +144,15 @@ const PostDetailsPage = () => {
                 * deleted by {post.edited_by} on {post.updated_at}
               </div>
             )}
+            <div className="comment-component-container">
+              {Object.values(post).length > 0 &&
+                post.comments.map((comment) => (
+                  <CommentCard
+                    comment={comment}
+                    key={`commentcard-${comment.id}`}
+                  />
+                ))}
+            </div>
           </div>
         </div>
         <div className="flex-container">

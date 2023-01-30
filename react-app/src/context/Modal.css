@@ -28,3 +28,8 @@
   align-items: center;
   border-radius: 0.25em;
 }
+
+#login-btn {
+  color: #1A1A1B;
+  background-color: whitesmoke;
+}

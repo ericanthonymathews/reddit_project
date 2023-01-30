@@ -14,7 +14,7 @@ function PostButton() {
   // FORM DATA STATE
   const [titleErrors, setTitleErrors] = useState([]);
   const [bodyErrors, setBodyErrors] = useState([]);
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
@@ -31,15 +31,15 @@ function PostButton() {
       data.forEach((error) => {
         let fieldsAndErrors = error.split(":");
         if (fieldsAndErrors[0] === "title ") {
-          tErrors.push(error);
+          tErrors.push(fieldsAndErrors[1]);
         }
         if (fieldsAndErrors[0] === "body ") {
-          bErrors.push(error);
+          bErrors.push(fieldsAndErrors[1]);
         }
       });
       setTitleErrors(tErrors);
       setBodyErrors(bErrors);
-      setErrors(data);
+      // setErrors(data);
     } else {
       setTitle("");
       setBody("");
@@ -93,6 +93,7 @@ function PostButton() {
             <div key={ind}>{error}</div>
           ))}
         </div> */}
+        <label>Title*</label>
         <div>
           {titleErrors.map((error, ind) => (
             <div key={`title-${ind}`} className="error-text">
@@ -100,7 +101,6 @@ function PostButton() {
             </div>
           ))}
         </div>
-        <label>Title*</label>
         <div>
           <textarea
             // type="textarea"
@@ -112,6 +112,7 @@ function PostButton() {
             value={title}
           ></textarea>
         </div>
+        <label>Body*</label>
         <div>
           {bodyErrors.map((error, ind) => (
             <div key={`body-${ind}`} className="error-text">
@@ -119,7 +120,6 @@ function PostButton() {
             </div>
           ))}
         </div>
-        <label>Body*</label>
         <div>
           <textarea
             // type="text"

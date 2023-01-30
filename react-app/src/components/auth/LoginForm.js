@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
+import DemoButton from "../DemoButton";
 
 const LoginForm = () => {
   // const [errors, setErrors] = useState([]);
@@ -21,10 +22,10 @@ const LoginForm = () => {
       data.forEach((error) => {
         let fieldsAndErrors = error.split(":");
         if (fieldsAndErrors[0] === "email ") {
-          eErrors.push(error);
+          eErrors.push(fieldsAndErrors[1]);
         }
         if (fieldsAndErrors[0] === "password ") {
-          pErrors.push(error);
+          pErrors.push(fieldsAndErrors[1]);
         }
       });
       setEmailErrors(eErrors);
@@ -47,6 +48,7 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={onLogin} class="flex-column">
+      <label>Log In</label>
       {/* <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
@@ -89,6 +91,7 @@ const LoginForm = () => {
       <button type="submit" className="single-btn-btn">
         Login
       </button>
+      <DemoButton />
     </form>
   );
 };
