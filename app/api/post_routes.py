@@ -34,9 +34,7 @@ def post(id):
 @post_routes.route("/<int:id>", methods=["PUT"])
 @login_required
 def edit_post(id):
-    """
-    Creates a new Post and returns the new post
-    """
+
     form = EditPostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

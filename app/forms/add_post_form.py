@@ -5,4 +5,4 @@ from wtforms.validators import DataRequired
 
 class AddPostForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
-    body = TextField('title', validators=[DataRequired()])
+    body = TextField('body', validators=[DataRequired()])
