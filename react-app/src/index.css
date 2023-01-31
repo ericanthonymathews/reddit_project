@@ -199,7 +199,9 @@ body {
 .comment-maker {
   font-size: 10pt;
 }
-
+.pop-com-link {
+  font-size: 8pt;
+}
 .pop-com-link:hover {
   cursor: pointer;
   text-decoration: underline;
