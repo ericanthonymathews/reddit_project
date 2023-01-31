@@ -14,7 +14,7 @@ function CommentForm() {
   const [errors, setErrors] = useState([]);
   const [description, setDescription] = useState("");
 
-  const createPost = async (e) => {
+  const createComment = async (e) => {
     e.preventDefault();
     if (!user) {
       setShowModal(true);
@@ -39,7 +39,7 @@ function CommentForm() {
   };
 
   return (
-    <form onSubmit={createPost}>
+    <form onSubmit={createComment}>
       <div>
         {errors.map((error, ind) => (
           <div key={`comment-create-error-${ind}`}>{error}</div>
@@ -50,7 +50,7 @@ function CommentForm() {
           // type="textarea"
           rows="10"
           cols="67"
-          className="form-textarea"
+          className="form-textarea comment-formarea"
           name="description"
           onChange={updateDescription}
           value={description}
