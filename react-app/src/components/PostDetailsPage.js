@@ -72,8 +72,8 @@ const PostDetailsPage = () => {
 
   return (
     <>
-      <div id="single-post-details-page">
-        <div className="flex-container">
+      <div className="flex-row">
+        <div className="home-feed">
           <div className="single-post-details">
             <div className="modular-header">
               <div className="post-community-link" onClick={navToCommunity}>
@@ -158,17 +158,15 @@ const PostDetailsPage = () => {
             </div>
           </div>
         </div>
-        <div className="flex-container">
-          <div className="single-post-community-feed-header">
-            <div
-              className="single-post-feed-header-name"
-              onClick={navToCommunity}
-            >
-              r/{community.name}
-            </div>
-            <div className="single-post-community-feed-header-about">
-              {community.about}
-            </div>
+        <div id="single-community">
+          <div
+            className="single-post-feed-header-name"
+            onClick={navToCommunity}
+          >
+            r/{community.name}
+          </div>
+          <div className="single-post-community-feed-header-about">
+            {community.about}
           </div>
         </div>
       </div>

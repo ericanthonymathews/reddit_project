@@ -30,6 +30,7 @@ body {
   background-color: #1A1A1B;
   padding-left: 2em;
   padding-right: 2em;
+  word-wrap: break-word;
 }
 
 .post-card {
@@ -57,7 +58,9 @@ body {
   padding-bottom: .2em;
 }
 
-
+.comment-formarea {
+  margin: 1em;
+}
 
 .modular-header {
   display: flex;
@@ -77,7 +80,7 @@ body {
 
 .post-title {
   font-size: 15pt;
-  padding-bottom: 1em;
+  padding: 1em;
 }
 
 .community-feed-header-header {
@@ -107,16 +110,20 @@ body {
 }
 
 .single-post-details {
-  width: 40vw;
   color: whitesmoke;
-  background-color: #1A1A1B;
-  padding: 0.5em;
-  margin-right: 5em;
+
+
   /* height: 23em; */
   display: flex;
   flex-direction: column;
-  border: #56565a 1px solid;
   border-radius: 0.1em;
+  width: 45vw;
+    margin: 1em;
+    margin-left: 8em;
+    padding-left: 0.5em;
+    background-color: #1A1A1B;
+    border: #56565a 1px solid;
+    border-radius: 0.1em;
 }
 .single-post-title {
   font-size: 15pt;
@@ -138,6 +145,7 @@ body {
 
 .single-post-community-feed-header-about {
   font-size: 10pt;
+  word-wrap: break-word;
 }
 .single-post-feed-header-name {
   font-size: 15pt;
@@ -194,6 +202,7 @@ body {
 
 .comment-description {
   padding: 1em;
+  word-wrap: break-word;
 }
 
 .comment-maker {
@@ -368,9 +377,8 @@ body {
 
 #comment-btn-btn {
   width: 9em;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  margin-right: 1em;
+  margin: 1em;
+
 }
 
 #popular-communities {
@@ -386,6 +394,21 @@ body {
   padding: 1em;
   border: #56565a 1px solid;
   border-radius: 0.1em;
+}
+
+#single-community {
+  align-self: start;
+    margin-top: 5.5em;
+    margin-left: 3em;
+    /* width: 20em; */
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    color: whitesmoke;
+    background-color: #1A1A1B;
+    padding: 1em;
+    border: #56565a 1px solid;
+    border-radius: 0.1em;
 }
 
 #pop-com-header {
