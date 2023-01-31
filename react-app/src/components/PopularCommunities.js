@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getAllCommunitiesThunk } from "../store/communities";
+import { getAllCommunitiesThunk, clearCommunity } from "../store/communities";
 
 const PopularCommunities = () => {
   const allCommunities = useSelector(
@@ -22,7 +22,10 @@ const PopularCommunities = () => {
             <div
               key={`pop-com-${community.name}`}
               className="pop-com-link"
-              onClick={() => history.push(`/communities/${community.id}`)}
+              onClick={async () => {
+                await dispatch(clearCommunity());
+                history.push(`/communities/${community.id}`);
+              }}
             >
               {community.name}
             </div>
