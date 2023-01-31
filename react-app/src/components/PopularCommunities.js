@@ -15,18 +15,20 @@ const PopularCommunities = () => {
   }, [dispatch]);
   return (
     <>
-      <div id="popular-communities">
-        <label id="pop-com-header">Popular Communities</label>
-        {Object.values(allCommunities).map((community) => (
-          <div
-            key={`pop-com-${community.name}`}
-            className="pop-com-link"
-            onClick={() => history.push(`/communities/${community.id}`)}
-          >
-            {community.name}
-          </div>
-        ))}
-      </div>
+      {Object.values(allCommunities).length > 0 && (
+        <div id="popular-communities">
+          <label id="pop-com-header">Popular Communities</label>
+          {Object.values(allCommunities).map((community) => (
+            <div
+              key={`pop-com-${community.name}`}
+              className="pop-com-link"
+              onClick={() => history.push(`/communities/${community.id}`)}
+            >
+              {community.name}
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 };
