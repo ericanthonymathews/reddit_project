@@ -7,6 +7,18 @@ from datetime import datetime
 
 community_routes = Blueprint('communities', __name__)
 
+# get all communities
+
+
+@community_routes.route('/')
+def communities():
+    communities = Community.query.all()
+    if communities:
+        return {"communities": [community.to_dict() for community in communities]}
+    else:
+        return {"communities": []}
+
+
 # get community information by id
 
 
