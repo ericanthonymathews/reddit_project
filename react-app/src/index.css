@@ -33,11 +33,11 @@ body {
 }
 
 .post-card {
-  background-color: #1A1A1B;
   width: 45vw;
   margin: 1em;
   margin-left: 8em;
   padding-left: 0.5em;
+  background-color: #1A1A1B;
   border: #56565a 1px solid;
   border-radius:0.1em;
 }
@@ -198,6 +198,12 @@ body {
 
 .comment-maker {
   font-size: 10pt;
+}
+
+.pop-com-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+
 }
 
 
@@ -363,4 +369,23 @@ body {
   margin-top: 1em;
   margin-bottom: 1em;
   margin-right: 1em;
+}
+
+#popular-communities {
+  align-self: start;
+  margin-top: 10em;
+  margin-left: 3em;
+  /* width: 20em; */
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  color: whitesmoke;
+  background-color: #1A1A1B;
+  padding: 1em;
+  border: #56565a 1px solid;
+  border-radius: 0.1em;
+}
+
+#pop-com-header {
+  padding: 2.4em;
 }
