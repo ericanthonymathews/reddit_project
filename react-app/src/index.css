@@ -18,6 +18,12 @@ body {
   width: 100vw;
 }
 
+footer {
+  width: 100vw;
+  height: 3vw;
+  background-color: #1A1A1B;
+}
+
 /* class styling */
 
 .feed {
@@ -266,6 +272,23 @@ body {
 .flex-row {
   display: flex;
   flex-direction: row;
+}
+
+.space-between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.full-width {
+  width: 100vw;
+}
+
+.right {
+  width: 17vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .flex-column {
