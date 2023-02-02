@@ -3,13 +3,14 @@
 This is the starter for the Flask React project.
 
 ## Getting started
+
 1. Clone this repository (only this branch)
 
 2. Install dependencies
 
-      ```bash
-      pipenv install -r requirements.txt
-      ```
+   ```bash
+   pipenv install -r requirements.txt
+   ```
 
 3. Create a **.env** file based on the example with proper settings for your
    development environment
@@ -17,7 +18,7 @@ This is the starter for the Flask React project.
 4. Make sure the SQLite3 database connection URL is in the **.env** file
 
 5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
+   by the `SCHEMA` environment variable. Replace the value for
    `SCHEMA` with a unique name, **making sure you use the snake_case
    convention**.
 
@@ -41,108 +42,199 @@ This is the starter for the Flask React project.
 
 7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
+## MVP List
 
-## Deployment through Render.com
+Bread-It is a Reddit clone where users can read, like, and comment on posts within communities and on the home page.<p>
+Live site: [Bread-It](https://bread-it.onrender.com/)<p>
 
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
+## 1. New account creation, log in, log out, and guest/demo login
 
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
+- Users can sign up, log in, and log out.
+- Users can use a demo log in to try the site.
+- Users can't use certain features without logging in.
+- Logged in users are directed to the home page which displays the most recent posts.
+- Logged out users are only able to use read functionality.
+- Demo button for logging in.
 
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
+## 2. Posts
 
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
+- Logged in user can add a post.
+- Logged in users can edit and delete their own post.
+- Logged in users can vote on a post.
 
-### Part A: Configure the Start and Build Commands
+## 3. Comments
 
-Start by giving your application a name.
+- Logged in user can add a comment on a post.
+- Logged in users can edit and delete their own comment.
+- If the post belongs to the user, the comment will denote that fact with a star and the text "OP"
 
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
+## 4. Communities
 
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
+- Logged in users can make communities.
+- Logged in users (eventually mods) can edit their own communities.
 
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
+## 5. Votes
 
-For your Flask project, enter the following command into the Build field, all in
-one line:
+- Logged in users can make upvote or downvote a post.
+- Logged in users can edit their vote or delete their vote by pressing clicking on arrows.
 
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
+## USER STORIES
 
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
+## Users
 
-Now, add your start command in the Start field:
+### Sign Up
 
-```shell
-# start script
-gunicorn app:app
-```
+- As an unregistered and unauthorized user, I want to be able to sign up for the website via a sign-up form.
+  - When I'm on the `/` page:
+    - I would like to be able to enter my email, username, and preferred password on a clearly laid out form.
+    - I would like the website to log me in upon successful completion of the sign-up form.
+      - So that I can seamlessly access the site's functionality
+  - When I enter invalid data on the sign-up form:
+    - I would like the website to inform me of the validations I failed to pass, and repopulate the form with my valid entries (except my password).
+    - So that I can try again without needing to refill forms I entered valid data into.
 
-_If you are using websockets, use the following start command instead for increased performance:_
+### Log in
 
-`gunicorn --worker-class eventlet -w 1 app:app`
+- As a registered and unauthorized user, I want to be able to log in to the website via a log-in form.
+  - When I'm on the `/` page:
+    - I would like to be able to enter my email and password on a clearly laid out form.
+    - I would like the website to log me in upon successful completion of the lob-up form.
+      - So that I can seamlessly access the site's functionality
+  - When I enter invalid data on the log-in form:
+    - I would like the website to inform me of the validations I failed to pass, and repopulate the form with my valid entries (except my password).
+      - So that I can try again without needing to refill forms I entered valid data into.
 
-### Part B: Add the Environment Variables
+### Demo User
 
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
+- As an unregistered and unauthorized user, I would like an easy to find and clear button on both the signup and login modals to allow me to visit the site as a guest without signing up or logging in.
+  - When I'm on any page:
+    - I can click on a Demo User button to log me in and allow me access as a normal user.
+      - So that I can test the site's features and functionality without needing to stop and enter credentials.
 
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
+### Log Out
 
-Add the following keys and values in the Render GUI form:
+- As a logged in user, I want to log out via an easy to find log out button on the navigation bar.
+  - While on any page of the site:
+    - I can log out of my account and be redirected to a page displaying the home page.
+      - So that I can easily log out to keep my information secure.
 
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
+## Posts
 
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
+### Create Posts
 
-Add the following keys and values:
+- As a logged in user, I want to be able to make new posts.
+  - When I'm on the `/communities/:communityId` page:
+    - I can write and submit a new post.
 
-- DATABASE_URL (copy value from Internal Database URL field)
+### Viewing Songs
 
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
+- As a logged in _or_ logged out user, I want to be able to view a selection of posts.
+  - When I'm on the `/`, `/communities/:communityId`, or
+    `/communities/:communityId/posts/:postId` page:
+    - I can see posts, votes, and number of reviews
+    - I can click on posts and see the posts as well as their votes and reviews.
 
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
+### Updating Posts
 
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
+- As a logged in user, I want to be able to edit my posts by clicking an Edit button associated with the posts on the
+  `/communities/:communityId/posts/:postId` page.
+  _ I can click "Edit" to make permanent changes to the post.
+  _ So that I can edit the post body.
 
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
+### Deleting Posts
 
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+- As a logged in user, I want to be able to delete my posts by clicking a Delete button associated with the post on the
+  `/communities/:communityId/posts/:postId` page.
+  - I can click "Delete" to permanently delete the body I have posted.
+
+## Comments
+
+### Create Comments
+
+- As a logged in user, I want to be able to post new comments.
+  - When I'm on the `/communities/:communityId/posts/:postId` page:
+    - I can write in a form and click on the `Add a Comment` to add a comment.
+    - I can create a comment, and upon creation, it renders on the post's detail page.
+
+### Viewing Comments
+
+- As a logged in _or_ logged out user, I want to be able to view a selection of comments.
+
+  - When I'm on the `/`, `/communities/:communityId`, or
+    `/communities/:communityId/posts/:postId` page:
+
+    - I can see comment in the on the post details page.
+    - I can see the number of comments anywhere the post is diplayed.
+
+### Updating Comments
+
+- As a logged in user, I want to be able to edit my comments by clicking an Edit button associated with the comment on the `/communities/:communityId/posts/:postId` page.
+  - I can click "Edit" to make permanent changes to the community I have posted.
+    - So that I can change the community if it needs to be edited.
+  - Edits show time of edit
+
+### Deleting Comments
+
+- As a logged in user, I want to be able to delete my comments by clicking a Delete button on the comment.
+  - When I'm on the`/communities/:communityId/posts/:postId` page:
+    - I can click "Delete" to permanently delete a comment I have created.
+    - Record of a comment will still exist on the page.
+
+## Communities
+
+### Create Communities
+
+- As a logged in user, I want to be able to host new communities.
+  - When I'm on the `/` page:
+    - I can click on the `Add a Community` button that directs me to a formpage.
+    - I can create a community, and upon creation, I'm navigated to that new community.
+
+### Viewing Communities
+
+- As a logged in _or_ logged out user, I want to be able to view a selection of Communites.
+
+  - When I'm on the `/` page:
+
+    - I can see playlists in the `popular communities` section.
+    - I can click on these communities and see the info and posts associated.
+
+  - When I'm on the `/communities/:communityId` page:
+    - I can view the posts within the community.
+    - I can see the about, name, and header of the community
+    - I can see the associated information of the each post in the community.
+
+### Updating Communities
+
+- As a logged in user, I want to be able to edit my communities by clicking an Edit button associated with the community on the `/communities/:communityId` page.
+  - I can click "Edit" to make permanent changes to the community I have posted.
+    - So that I can change the community if it needs to be edited.
+
+## Votes
+
+### Create Votes
+
+- As a logged in user, I want to be able to vote on posts.
+  - When I'm on the `/`, `/communities/:communityId`, or
+    `/communities/:communityId/posts/:postId` page:
+    - I can click on an arrow button that votes on the post.
+
+### Viewing Votes
+
+- As a logged in _or_ logged out user, I want to be able to view votes associated with each post.
+
+  - When I'm on the any page with a post:
+
+    - I can see post's votes.
+    - I can see the value of my own vote via colored in arrows.
+
+### Updating Votes
+
+- As a logged in user, I want to be able to edit my votes by clicking the opposite voting button associated with the post.
+  - I can click "Upvote" or "Downvote" to make permanent changes to the vote.
+    - So that I can change the vote to reflect my current opinion of the post.
+
+### Deleting Votes
+
+- As a logged in user, I want to be able to delet my votes by clicking the same voting button associated with the post as my original vote.
+  - I can click "Upvote" or "Downvote" to make permanent changes to the vote.
+    - So that I can remove my vote to reflect my current opinion of the post.
