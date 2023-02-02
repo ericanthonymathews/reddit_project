@@ -12,6 +12,7 @@ import Feed from "./components/Feed";
 import CommunityFeed from "./components/CommunityFeed";
 import PostDetailsPage from "./components/PostDetailsPage";
 import DeleteForm from "./components/DeleteForm";
+import CreateCommunityForm from "./components/CreateCommunityForm";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -46,6 +47,9 @@ function App() {
         </ProtectedRoute>
         <Route path="/" exact={true}>
           <Feed />
+        </Route>
+        <Route path="/communities/new" exact={true}>
+          <CreateCommunityForm />
         </Route>
         <Route path="/communities/:communityId" exact={true}>
           <CommunityFeed />

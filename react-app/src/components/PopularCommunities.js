@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { clearCommunityPosts } from "../store/posts";
 import { getAllCommunitiesThunk, clearCommunity } from "../store/communities";
-
+import CreateCommunityModal from "./CreateCommunityModal";
 const PopularCommunities = () => {
   const allCommunities = useSelector(
     (state) => state.communities.allCommunities
@@ -32,6 +32,7 @@ const PopularCommunities = () => {
               {community.name}
             </div>
           ))}
+          <CreateCommunityModal />
         </div>
       )}
     </>

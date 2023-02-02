@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from app.models import db, Post, Community
-from app.forms import AddPostForm, EditPostForm
+from app.forms import AddPostForm, EditPostForm, AddCommunityForm
 from flask_login import login_required, current_user
 from app.api.auth_routes import validation_errors_to_error_messages
 from datetime import datetime
@@ -17,6 +17,26 @@ def communities():
         return {"communities": [community.to_dict() for community in communities]}
     else:
         return {"communities": []}
+
+# add a single community
+
+@community_routes.route('/', methods=["POST"])
+@login_required
+def add_community():
+
+    form = AddCommunityForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        community = Community(
+            user_id=current_user.id,
+            name=form.data['name'],
+            header=form.data['header'],
+            about=form.data['about']
+        )
+        db.session.add(community)
+        db.session.commit()
+        return community.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 # get community information by id
@@ -69,7 +89,7 @@ def posts_by_id(id):
 @login_required
 def edit_post(community_id, id):
     """
-    Creates a new Post and returns the new post
+    Edits a Post and returns the edited post
     """
     form = EditPostForm()
     form['csrf_token'].data = request.cookies['csrf_token']

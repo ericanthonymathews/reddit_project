@@ -100,7 +100,7 @@ export const createNewPostThunk =
         return data.errors;
       }
     } else {
-      return ["An error occured. Please try again"];
+      return ["An error occurred. Please try again"];
     }
   };
 
@@ -150,7 +150,7 @@ export const addCommentThunk = (post_id, description) => async (dispatch) => {
     dispatch(addComment(data));
     return null;
   } else if (response.status < 500) {
-    const data = response.json();
+    const data = await response.json();
     if (data.errors) {
       return data.errors;
     }
@@ -177,7 +177,7 @@ export const editCommentThunk =
       dispatch(editPostComment(data));
       return null;
     } else if (response.status < 500) {
-      const data = response.json();
+      const data = await response.json();
       if (data.errors) {
         return data.errors;
       }

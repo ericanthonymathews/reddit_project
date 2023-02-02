@@ -81,6 +81,7 @@ body {
 .post-title {
   font-size: 15pt;
   padding: 1em;
+  word-wrap: break-word;
 }
 
 .community-feed-header-header {
@@ -128,10 +129,12 @@ body {
 .single-post-title {
   font-size: 15pt;
   padding: 1em;
+  word-wrap: break-word;
 }
 
 .single-post-body {
   padding: 1em;
+  word-wrap: break-word;
 }
 
 .single-post-community-feed-header {
@@ -272,6 +275,12 @@ body {
   padding: 2em;
 
 }
+.new-input {
+  color: whitesmoke;
+  background-color: black;
+  resize: none;
+  margin: .35em;
+}
 /* ID styling */
 
 #delete-prompt-container {
@@ -322,8 +331,9 @@ body {
   height: 99vw;
   width: 17vw;
   position: fixed;
-  align-items: center;
+  align-items: left;
   padding-top: 2em;
+  padding-left: 1.2vw;
 }
 
 #community-feed {
@@ -334,6 +344,18 @@ body {
   height: 99vw;
   justify-content: flex-start;
 }
+
+#new-community-feed {
+  display:flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 85vw;
+  height: 99vw;
+  justify-content: flex-start;
+  padding-left: 14em;
+  padding-top: 3em;
+}
+
 
 #logo {
   height: 2em;
@@ -413,4 +435,24 @@ body {
 
 #pop-com-header {
   padding: 2.4em;
+}
+
+#new-frm-cm {
+  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+}
+
+#new-name {
+  width: 25em;
+}
+#crt-cmm-btn {
+  color: whitesmoke;
+  border: none;
+  background-color: #1A1A1B;
+  margin: 1em;
+  cursor: pointer;
+}
+#crt-cmm-btn:hover {
+  text-decoration: underline;
 }

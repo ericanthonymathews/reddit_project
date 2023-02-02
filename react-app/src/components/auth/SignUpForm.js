@@ -41,6 +41,8 @@ const SignUpForm = () => {
         setUsernameErrors(uErrors);
         // setErrors(data);
       }
+    } else {
+      setPasswordErrors(["Passwords must match"]);
     }
   };
 
