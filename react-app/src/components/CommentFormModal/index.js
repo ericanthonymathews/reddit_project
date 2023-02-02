@@ -18,9 +18,10 @@ function CommentForm() {
     e.preventDefault();
     if (!user) {
       setShowModal(true);
-    } else if (description.length) {
+    } else {
       const data = await dispatch(addCommentThunk(postId, description));
       if (data) {
+        console.log("~~~~~~~~~~~~~~~~~~~~DATA", data);
         const dErrors = [];
         data.forEach((error) => {
           let fieldsAndErrors = error.split(":");
@@ -41,11 +42,13 @@ function CommentForm() {
   return (
     <form onSubmit={createComment}>
       <div>
-        {errors.map((error, ind) => (
-          <div key={`comment-create-error-${ind}`}>{error}</div>
-        ))}
-      </div>
-      <div>
+        <div>
+          {errors.map((error, ind) => (
+            <div key={`comment-create-error-${ind}`} className="error-text">
+              {error}
+            </div>
+          ))}
+        </div>
         <textarea
           // type="textarea"
           rows="10"

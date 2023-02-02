@@ -37,15 +37,15 @@ def add_post_comment(id):
     form = AddCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-      comment = Comment(
-        user_id=current_user.id,
-        description=form.data['description'],
-        post_id=form.data['post_id'],
-      )
-      db.session.add(comment)
-      db.session.commit()
-      updated_post = Post.query.get(id)
-      return updated_post.to_dict()
+        comment = Comment(
+            user_id=current_user.id,
+            description=form.data['description'],
+            post_id=form.data['post_id'],
+        )
+        db.session.add(comment)
+        db.session.commit()
+        updated_post = Post.query.get(id)
+        return updated_post.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

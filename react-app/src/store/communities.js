@@ -1,6 +1,7 @@
 const LOAD_COMMUNITIES = "communities/LOAD_COMMUNITIES";
 const LOAD_COMMUNITY = "communities/LOAD_COMMUNITY";
 const CLEAR_COMMUNITY = "communities/CLEAR_COMMUNITY";
+const ADD_COMMUNITY = "communities/ADD_COMMUNITY";
 
 // ACTION CREATOR
 const loadCommunities = (communities) => ({
@@ -15,6 +16,11 @@ const loadCommunity = (community) => ({
 
 export const clearCommunity = () => ({
   type: CLEAR_COMMUNITY,
+});
+
+const addCommunity = (community) => ({
+  type: ADD_COMMUNITY,
+  community,
 });
 
 // THUNK ACTION CREATOR
@@ -33,6 +39,33 @@ export const getAllCommunitiesThunk = () => async (dispatch) => {
     await dispatch(loadCommunities(data.communities));
   }
 };
+
+export const createNewCommunityThunk =
+  (name, header, about) => async (dispatch) => {
+    const response = await fetch(`/api/communities/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        header,
+        about,
+      }),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      await dispatch(addCommunity(data));
+      return data.id;
+    } else if (response.status < 500) {
+      const data = await response.json();
+      if (data.errors) {
+        return data.errors;
+      }
+    } else {
+      return ["An error occurred. Please try again"];
+    }
+  };
 
 // INITIAL STATE uwu
 const initialState = { singleCommunity: {}, allCommunities: {} };
@@ -62,6 +95,14 @@ export default function reducer(state = initialState, action) {
         allCommunities: { ...state.allCommunities },
         singleCommunity: {},
       };
+      return newState;
+    }
+    case ADD_COMMUNITY: {
+      const newState = {
+        allCommunities: { ...state.allCommunities },
+        singleCommunity: action.community,
+      };
+      newState.allCommunities[action.community.id] = action.community;
       return newState;
     }
     default:
