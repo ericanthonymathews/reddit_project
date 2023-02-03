@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { deletePostThunk } from "../store/posts";
@@ -17,6 +17,12 @@ const DeleteForm = () => {
     await dispatch(deletePostThunk(communityId, postId, user.username));
     history.push(`/communities/${communityId}/posts/${postId}`);
   };
+
+  useEffect(() => {
+    if (!user) {
+      history.push(`/communities/${communityId}/posts/${postId}`);
+    }
+  }, [user, history, communityId, postId]);
   return (
     <div id="delete-prompt-container">
       <div id="delete-prompt-message">
