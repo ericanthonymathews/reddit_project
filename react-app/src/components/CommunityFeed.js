@@ -86,80 +86,85 @@ const CommunityFeed = () => {
   return (
     <>
       <>
-        <div id="community-feed">
-          <>
-            {Object.values(community).length > 0 && (
-              <div className="community-feed-header">
-                {!showEdit && (
-                  <div className="community-feed-header-header">
-                    {community.header}
-                    {user?.id === community?.user_id && (
-                      <i
-                        className="fa-solid fa-pen-to-square"
-                        onClick={openHeaderEdit}
-                      ></i>
-                    )}
+        <div className="flex-row">
+          <div className="com-filler" />
+
+          <div id="community-feed">
+            <>
+              {Object.values(community).length > 0 && (
+                <div className="community-feed-header">
+                  {!showEdit && (
+                    <div className="community-feed-header-header">
+                      {community.header}
+                      {user?.id === community?.user_id && (
+                        <i
+                          className="fa-solid fa-pen-to-square"
+                          onClick={openHeaderEdit}
+                        ></i>
+                      )}
+                    </div>
+                  )}
+                  {showEdit && (
+                    <>
+                      {headerErrors.map((error, ind) => (
+                        <div key={`header-err-${ind}`} className="error-text">
+                          {error}
+                        </div>
+                      ))}
+                      <input
+                        className="community-feed-header-header new-input"
+                        type="text"
+                        name="header"
+                        id="new-header"
+                        placeholder="Community Header*"
+                        onChange={updateHeader}
+                        value={header}
+                      ></input>
+                    </>
+                  )}
+                  <div className="community-feed-header-name">
+                    r/{community.name}
                   </div>
-                )}
-                {showEdit && (
-                  <>
-                    {headerErrors.map((error, ind) => (
-                      <div key={`header-err-${ind}`} className="error-text">
-                        {error}
-                      </div>
-                    ))}
-                    <input
-                      className="community-feed-header-header new-input"
-                      type="text"
-                      name="header"
-                      id="new-header"
-                      placeholder="Community Header*"
-                      onChange={updateHeader}
-                      value={header}
-                    ></input>
-                  </>
-                )}
-                <div className="community-feed-header-name">
-                  r/{community.name}
+                  {!showEdit && (
+                    <div className="community-feed-header-about">
+                      {community.about}
+                    </div>
+                  )}
+                  {showEdit && (
+                    <>
+                      {aboutErrors.map((error, ind) => (
+                        <div key={`about-err-${ind}`} className="error-text">
+                          {error}
+                        </div>
+                      ))}
+                      <textarea
+                        className="community-feed-header-about new-input"
+                        rows="8"
+                        cols="80"
+                        name="about"
+                        placeholder="Tell us about your community*"
+                        value={about}
+                        onChange={updateAbout}
+                      ></textarea>
+                    </>
+                  )}
+                  {!showEdit && <PostButton />}
+                  {showEdit && (
+                    <>
+                      <button
+                        onClick={cancel}
+                        className="nav-btn-btn margin1em"
+                      >
+                        Cancel
+                      </button>
+                      <button onClick={save} className="nav-btn-btn margin1em">
+                        Save
+                      </button>
+                    </>
+                  )}
                 </div>
-                {!showEdit && (
-                  <div className="community-feed-header-about">
-                    {community.about}
-                  </div>
-                )}
-                {showEdit && (
-                  <>
-                    {aboutErrors.map((error, ind) => (
-                      <div key={`about-err-${ind}`} className="error-text">
-                        {error}
-                      </div>
-                    ))}
-                    <textarea
-                      className="community-feed-header-about new-input"
-                      rows="8"
-                      cols="80"
-                      name="about"
-                      placeholder="Tell us about your community*"
-                      value={about}
-                      onChange={updateAbout}
-                    ></textarea>
-                  </>
-                )}
-                {!showEdit && <PostButton />}
-                {showEdit && (
-                  <>
-                    <button onClick={cancel} className="nav-btn-btn margin1em">
-                      Cancel
-                    </button>
-                    <button onClick={save} className="nav-btn-btn margin1em">
-                      Save
-                    </button>
-                  </>
-                )}
-              </div>
-            )}
-          </>
-          <div className="flex-row">
+              )}
+            </>
             {Object.values(communityPosts).length > 0 && (
               <>
                 <div className="feed">
@@ -169,7 +174,6 @@ const CommunityFeed = () => {
                 </div>
               </>
             )}
-            <div className="com-filler" />
           </div>
         </div>
       </>
