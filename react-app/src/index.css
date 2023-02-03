@@ -29,6 +29,7 @@ footer {
 .feed {
   display: flex;
   flex-direction: column-reverse;
+  justify-content: flex-end;
 }
 
 .community-feed-header {
@@ -126,6 +127,10 @@ footer {
 
 .filler{
   height:51.78vw;
+  width: 0;
+}
+.com-filler{
+  height:38.85vw;
   width: 0;
 }
 .del-filler{
