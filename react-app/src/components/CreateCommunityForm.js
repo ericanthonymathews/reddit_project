@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createNewCommunityThunk } from "../store/communities";
 
 const CreateCommunityForm = () => {
+  const user = useSelector((state) => state.session.user);
   const [headerErrors, setHeaderErrors] = useState([]);
   const [nameErrors, setNameErrors] = useState([]);
   const [aboutErrors, setAboutErrors] = useState([]);
@@ -53,6 +54,12 @@ const CreateCommunityForm = () => {
     e.preventDefault();
     setAbout(e.target.value);
   };
+
+  useEffect(() => {
+    if (!user) {
+      history.push("/");
+    }
+  }, [user, history]);
 
   return (
     <div id="new-community-feed">

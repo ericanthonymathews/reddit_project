@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { editCommentThunk } from "../store/posts";
 import DeleteCommentModal from "./DeleteCommentModal";
@@ -41,6 +41,13 @@ const CommentCard = ({ comment, post }) => {
       setShowEdit(false);
     }
   };
+
+  useEffect(() => {
+    if (!user) {
+      setDescription(comment.description);
+      setShowEdit(false);
+    }
+  }, [user, comment]);
 
   return (
     <div className="comment-card">
