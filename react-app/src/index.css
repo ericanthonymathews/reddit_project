@@ -118,8 +118,19 @@ footer {
 .home-feed {
   padding-top: 5vw;
   padding-left: 17vw;
+  /* height: 99vw; */
   display: flex;
   flex-direction: column-reverse;
+  justify-content: flex-end;
+}
+
+.filler{
+  height: 99vw;
+  width: 0;
+}
+.del-filler{
+  height: 31.5vw;
+  width: 0;
 }
 
 .single-post-details {
@@ -328,12 +339,7 @@ footer {
   display: flex;
   flex-direction: row;
 }
-#community-feed {
-  padding-left: 17vw;
-  padding-top: 3.4vw;
-  width: 100vw;
-  height: 99vw;
-}
+
 
 #root {
   display: flex;
@@ -373,11 +379,19 @@ footer {
 }
 
 #community-feed {
+  padding-left: 17vw;
+  padding-top: 3.4vw;
+  /* width: 100vw;
+  height: 99vw; */
+}
+#community-feed {
   display:flex;
+  padding-left: 17vw;
+  padding-top: 3.4vw;
   flex-direction: column;
   flex-wrap: wrap;
   width: 83vw;
-  height: 99vw;
+  /* height: 99vw; */
   justify-content: flex-start;
 }
 
