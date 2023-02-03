@@ -121,10 +121,15 @@ footer {
   /* height: 99vw; */
   display: flex;
   flex-direction: column-reverse;
+  justify-content: flex-end;
 }
 
 .filler{
   height: 99vw;
+  width: 0;
+}
+.del-filler{
+  height: 31.5vw;
   width: 0;
 }
 

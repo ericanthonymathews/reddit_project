@@ -169,6 +169,7 @@ const PostDetailsPage = () => {
             {community.about}
           </div>
         </div>
+        <div className="filler" />
       </div>
     </>
   );

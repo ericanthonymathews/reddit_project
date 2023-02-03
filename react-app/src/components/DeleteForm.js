@@ -35,6 +35,7 @@ const DeleteForm = () => {
       <button onClick={yes} id="yes-delete" className="nav-btn-btn">
         Delete
       </button>
+      <div className="del-filler" />
     </div>
   );
 };
