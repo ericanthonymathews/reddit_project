@@ -22,6 +22,7 @@ const Feed = () => {
         ))}
       </div>
       <PopularCommunities />
+      <div className="filler" />
     </div>
   );
 };
