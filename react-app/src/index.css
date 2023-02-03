@@ -67,16 +67,22 @@ footer {
 .comment-formarea {
   margin: 1em;
 }
+.fa-pen-to-square {
+  cursor: pointer;
+  margin-left: 1em;
+}
 
 .modular-header {
   display: flex;
   flex-direction: row;
+  word-wrap: break-word;
 }
 
 .post-community-link {
   color: whitesmoke;
   padding-right: 0.5em;
   font-size: 10pt;
+  word-wrap: break-word;
 }
 
 .post-community-link:hover {
@@ -159,6 +165,7 @@ footer {
 .single-post-feed-header-name {
   font-size: 15pt;
   padding-bottom: 2em;
+  word-wrap: break-word;
 }
 
 .single-post-feed-header-name:hover {
@@ -219,6 +226,7 @@ footer {
 }
 .pop-com-link {
   font-size: 8pt;
+  word-wrap: break-word;
 }
 .pop-com-link:hover {
   cursor: pointer;
@@ -303,6 +311,10 @@ footer {
   background-color: black;
   resize: none;
   margin: .35em;
+}
+
+.margin1em {
+  margin: 1em;
 }
 /* ID styling */
 
