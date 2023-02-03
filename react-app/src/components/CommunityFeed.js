@@ -159,16 +159,18 @@ const CommunityFeed = () => {
               </div>
             )}
           </>
-          {Object.values(communityPosts).length > 0 && (
-            <>
-              <div className="feed">
-                {Object.values(communityPosts).map((post) => (
-                  <PostCard post={post} key={`feed-postcard-${post.id}`} />
-                ))}
-              </div>
-            </>
-          )}
-          <div className="filler" />
+          <div className="flex-row">
+            {Object.values(communityPosts).length > 0 && (
+              <>
+                <div className="feed">
+                  {Object.values(communityPosts).map((post) => (
+                    <PostCard post={post} key={`feed-postcard-${post.id}`} />
+                  ))}
+                </div>
+              </>
+            )}
+            <div className="com-filler" />
+          </div>
         </div>
       </>
     </>
