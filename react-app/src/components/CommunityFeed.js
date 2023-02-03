@@ -72,6 +72,14 @@ const CommunityFeed = () => {
   };
 
   useEffect(() => {
+    if (!user) {
+      setHeader(community.header);
+      setAbout(community.about);
+      setShowEdit(false);
+    }
+  }, [user, community]);
+
+  useEffect(() => {
     dispatch(getCommunityPostsThunk(communityId));
     dispatch(getCommunityThunk(communityId));
   }, [dispatch, communityId]);
