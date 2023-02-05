@@ -167,6 +167,7 @@ const CommunityFeed = () => {
             {Object.values(communityPosts).length > 0 && (
               <>
                 <div className="feed">
+                  <div className="footer-filler" />
                   {Object.values(communityPosts).map((post) => (
                     <PostCard post={post} key={`feed-postcard-${post.id}`} />
                   ))}

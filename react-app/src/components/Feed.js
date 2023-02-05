@@ -13,6 +13,7 @@ const Feed = () => {
   return (
     <div className="flex-row">
       <div className="home-feed">
+        <div className="footer-filler" />
         {Object.values(allPosts).map((post) => (
           <PostCard
             post={post}
