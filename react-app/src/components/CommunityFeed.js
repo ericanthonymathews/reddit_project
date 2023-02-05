@@ -13,7 +13,6 @@ const CommunityFeed = () => {
   const { communityId } = useParams();
   const dispatch = useDispatch();
 
-  const [showHeaderEdit, setShowHeaderEdit] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
 
   const [headerErrors, setHeaderErrors] = useState([]);

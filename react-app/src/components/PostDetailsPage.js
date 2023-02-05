@@ -25,6 +25,12 @@ const PostDetailsPage = () => {
     dispatch(getCommunityThunk(communityId));
   }, [dispatch, communityId, postId]);
 
+  useEffect(() => {
+    if (!user) {
+      setShowEdit(false);
+    }
+  }, [user, history]);
+
   const navToCommunity = (e) => {
     e.preventDefault();
     dispatch(clearCommunityPosts());
