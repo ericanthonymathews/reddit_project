@@ -27,9 +27,9 @@ def seed_communities():
         about="A community dedicated to the discussion and admiration of natural grains."
     )
     breadposting = Community(
-        user_id=2,
+        user_id=6,
         name='breadposting',
-        header="'Bread Posting",
+        header="Bread Posting",
         about="Be funny. (but bread-related)"
     )
 
