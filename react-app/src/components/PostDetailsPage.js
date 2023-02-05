@@ -143,14 +143,15 @@ const PostDetailsPage = () => {
                 * edited by {post.edited_by} on {post.updated_at}
               </div>
             )}
-            {/* {post.is_deleted && !showEdit && (
-          <div className="single-post-body">{post.body}</div>
-        )} */}
             {post.is_deleted && post.edited_by && (
               <div>
                 * deleted by {post.edited_by} on {post.updated_at}
               </div>
             )}
+            <div className="post-card-comments">
+              <i className="fa-regular fa-message"></i> {post.comments.length}{" "}
+              Comments
+            </div>
             <div className="comment-component-container">
               {Object.values(post).length > 0 &&
                 post.comments.map((comment) => (
@@ -162,6 +163,7 @@ const PostDetailsPage = () => {
                 ))}
               <CommentForm />
             </div>
+            <div className="details-footer-filler" />
           </div>
         </div>
         <div id="single-community">
@@ -175,7 +177,7 @@ const PostDetailsPage = () => {
             {community.about}
           </div>
         </div>
-        <div className="filler" />
+        {/* <div className="filler" /> */}
       </div>
     </>
   );

@@ -139,7 +139,12 @@ footer {
   height: 31.5vw;
   width: 0;
 }
-
+.details-footer-filler {
+  height: 5vw;
+}
+.footer-filler{
+  height: 4vw;
+}
 .single-post-details {
   color: whitesmoke;
 
