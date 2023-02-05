@@ -20,10 +20,24 @@ def seed_posts():
         title="I HATE it when it's too cold for my starter to be active.",
         body="I freggin' hate it when I wake up and there are no level mark differences in my starter jar. It was too cold last night? Like: is the yeast even active. Rhetorical. But is the yeast even active? Anyone feel me?"
     )
+    post4 = Post(
+        user_id=4,
+        community_id=4,
+        title="Pretty sure Subway's grains aren't natty'",
+        body="Yea so they say the bread is all natural whole grains, but I'm starting to suspect their bread size and taste is chemically enhanced. Will follow up with edits about further details."
+    )
+    post5 = Post(
+        user_id=5,
+        community_id=5,
+        title="I can't feel my bread.",
+        body="I woke up this morning, and I couldn't feel my bread. What is wrong with me: does anyone feel bread?"
+    )
 
     db.session.add(post1)
     db.session.add(post2)
     db.session.add(post3)
+    db.session.add(post4)
+    db.session.add(post5)
     db.session.commit()
 
 

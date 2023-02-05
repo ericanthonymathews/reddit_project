@@ -148,10 +148,10 @@ const PostDetailsPage = () => {
                 * deleted by {post.edited_by} on {post.updated_at}
               </div>
             )}
-            <div className="post-card-comments">
+            {/* <div className="post-card-comments">
               <i className="fa-regular fa-message"></i> {post.comments.length}{" "}
               Comments
-            </div>
+            </div> */}
             <div className="comment-component-container">
               {Object.values(post).length > 0 &&
                 post.comments.map((comment) => (

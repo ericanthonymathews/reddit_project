@@ -20,10 +20,24 @@ def seed_communities():
         header="Great British Baking Show",
         about="Community to discuss the greatness of the Great British Baking Show. Let the calm energy of baking and bread permeate reddit until it becomes breadit. It starts here ladies, gentlemen, all you fine folks."
     )
+    nattygrains = Community(
+        user_id=2,
+        name='NattyGrains',
+        header="'Natty Grains",
+        about="A community dedicated to the discussion and admiration of natural grains."
+    )
+    breadposting = Community(
+        user_id=2,
+        name='breadposting',
+        header="'Bread Posting",
+        about="Be funny. (but bread-related)"
+    )
 
     db.session.add(whysosourdough)
     db.session.add(aita)
     db.session.add(greatbritishbakingshow)
+    db.session.add(nattygrains)
+    db.session.add(breadposting)
     db.session.commit()
 
 
