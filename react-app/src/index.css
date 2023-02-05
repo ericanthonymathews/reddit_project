@@ -22,6 +22,8 @@ footer {
   width: 100vw;
   height: 3vw;
   background-color: #1A1A1B;
+  position: fixed;
+  bottom: 0;
 }
 
 /* class styling */
