@@ -2,10 +2,18 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { clearCommunityPosts, clearSinglePost } from "../store/posts";
 import { clearCommunity } from "../store/communities";
+import LikeButtonsModal from "./LikeButtonsModal";
 
 const PostCard = ({ post, atHomePage = false }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  let page;
+
+  if (atHomePage) {
+    page = "home";
+  } else {
+    page = "community";
+  }
 
   const navToCommunity = (e) => {
     e.preventDefault();
@@ -38,9 +46,12 @@ const PostCard = ({ post, atHomePage = false }) => {
       <div className="post-title" onClick={navToPost}>
         {post.title}
       </div>
-      <div className="post-card-comments">
-        <i className="fa-regular fa-message"></i> {post.comments.length}{" "}
-        Comments
+      <div className="flex-row space-between">
+        <div className="post-card-comments">
+          <i className="fa-regular fa-message"></i> {post.comments.length}{" "}
+          Comments
+        </div>
+        <LikeButtonsModal post={post} page={page} />
       </div>
     </div>
   );

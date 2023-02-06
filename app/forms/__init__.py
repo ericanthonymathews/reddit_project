@@ -6,3 +6,5 @@ from .edit_comment_form import EditCommentForm
 from .add_comment_form import AddCommentForm
 from .add_community_form import AddCommunityForm
 from .edit_community_form import EditCommunityForm
+from .add_vote_form import AddVoteForm
+from .edit_vote_form import EditVoteForm

@@ -5,6 +5,9 @@ const ADD_POST = "posts/ADD_POST";
 const EDIT_POST = "posts/EDIT_POST";
 const ADD_POST_COMMENT = "/posts/ADD_POST_COMMENT";
 const EDIT_POST_COMMENT = "posts/EDIT_POST_COMMENT";
+const ADD_VOTE_TO_HOME = "posts/ADD_VOTE_TO_HOME";
+const ADD_VOTE_TO_COMMUNITY = "posts/ADD_VOTE_TO_COMMUNITY";
+const ADD_VOTE_TO_DETAILS = "posts/ADD_VOTE_TO_DETAILS";
 const CLEAR_COMMUNITY_POSTS = "posts/CLEAR_COMMUNITY_POSTS";
 const CLEAR_SINGLE_POST = "posts/CLEAR_SINGLE_POST";
 
@@ -41,6 +44,21 @@ const addComment = (post) => ({
 
 const editPostComment = (post) => ({
   type: EDIT_POST_COMMENT,
+  post,
+});
+
+const addVoteToHome = (post) => ({
+  type: ADD_VOTE_TO_HOME,
+  post,
+});
+
+const addVoteToDetails = (post) => ({
+  type: ADD_VOTE_TO_DETAILS,
+  post,
+});
+
+const addVoteToCommunity = (post) => ({
+  type: ADD_VOTE_TO_COMMUNITY,
   post,
 });
 
@@ -238,6 +256,30 @@ export const deletePostThunk =
       return ["An error occured. Please try again"];
     }
   };
+
+export const addVoteToHomeThunk = (id) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${id}`);
+  if (response.ok) {
+    const data = await response.json();
+    await dispatch(addVoteToHome(data));
+  }
+};
+
+export const addVoteToCommunityThunk = (id) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${id}`);
+  if (response.ok) {
+    const data = await response.json();
+    await dispatch(addVoteToCommunity(data));
+  }
+};
+
+export const addVoteToDetailsThunk = (id) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${id}`);
+  if (response.ok) {
+    const data = await response.json();
+    await dispatch(addVoteToDetails(data));
+  }
+};
 // INITIAL STATE
 const initialState = { allPosts: {}, communityPosts: {}, singlePost: {} };
 
@@ -318,6 +360,32 @@ export default function reducer(state = initialState, action) {
       return newState;
     }
     case EDIT_POST_COMMENT: {
+      const newState = {
+        allPosts: { ...state.allPosts },
+        communityPosts: { ...state.communityPosts },
+        singlePost: action.post,
+      };
+      return newState;
+    }
+    case ADD_VOTE_TO_HOME: {
+      const newState = {
+        allPosts: { ...state.allPosts },
+        communityPosts: { ...state.communityPosts },
+        singlePost: state.singlePost,
+      };
+      newState.allPosts[action.post.id] = action.post;
+      return newState;
+    }
+    case ADD_VOTE_TO_COMMUNITY: {
+      const newState = {
+        allPosts: { ...state.allPosts },
+        communityPosts: { ...state.communityPosts },
+        singlePost: state.singlePost,
+      };
+      newState.communityPosts[action.post.id] = action.post;
+      return newState;
+    }
+    case ADD_VOTE_TO_DETAILS: {
       const newState = {
         allPosts: { ...state.allPosts },
         communityPosts: { ...state.communityPosts },

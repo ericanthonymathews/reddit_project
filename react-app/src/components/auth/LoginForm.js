@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
+import { getUserPostVotesThunk } from "../../store/votes";
 import DemoButton from "../DemoButton";
 
 const LoginForm = () => {
-  // const [errors, setErrors] = useState([]);
   const [emailErrors, setEmailErrors] = useState([]);
   const [passwordErrors, setPasswordErrors] = useState([]);
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
-    if (data) {
+    if (typeof data !== "number") {
       const eErrors = [];
       const pErrors = [];
       data.forEach((error) => {
@@ -30,7 +30,8 @@ const LoginForm = () => {
       });
       setEmailErrors(eErrors);
       setPasswordErrors(pErrors);
-      // setErrors(data);
+    } else {
+      dispatch(getUserPostVotesThunk());
     }
   };
 
@@ -47,13 +48,8 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin} class="flex-column">
+    <form onSubmit={onLogin} className="flex-column">
       <label>Log In</label>
-      {/* <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div> */}
       <div>
         {emailErrors.map((error, ind) => (
           <div key={`email-${ind}`} className="error-text">

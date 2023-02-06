@@ -24,7 +24,7 @@ def seed_posts():
         user_id=4,
         community_id=4,
         title="Pretty sure Subway's grains aren't natty'",
-        body="Yea so they say the bread is all natural whole grains, but I'm starting to suspect their bread size and taste is chemically enhanced. Will follow up with edits about further details."
+        body="Yea so they say the bread is made from all natural whole grains, but I'm starting to suspect that their bread size and taste are chemically enhanced. Bread looks bigger than sourdough I've been proofing for some time now. Maybe I'm just peanut butter n' jealous."
     )
     post5 = Post(
         user_id=5,
