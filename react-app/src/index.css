@@ -354,6 +354,10 @@ footer {
 .red:hover {
   background-color: red;
 }
+
+.gry {
+  color:#58585d;
+}
 /* ID styling */
 
 #delete-prompt-container {
