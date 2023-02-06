@@ -257,6 +257,10 @@ footer {
 
 }
 
+.num-votes {
+  margin-left: 1em;
+}
+
 
 /* modular styling */
 
@@ -338,6 +342,17 @@ footer {
 
 .margin1em {
   margin: 1em;
+}
+.marginp5em {
+  margin: .25em;
+}
+
+.red {
+  background-color: red;
+}
+
+.red:hover {
+  background-color: red;
 }
 /* ID styling */
 

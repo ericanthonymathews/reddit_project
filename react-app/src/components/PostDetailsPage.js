@@ -3,6 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CommentCard from "./CommentCard";
 import CommentForm from "./CommentFormModal";
+import LikeButtonsModal from "./LikeButtonsModal";
 import {
   clearCommunityPosts,
   getOnePostThunk,
@@ -148,9 +149,14 @@ const PostDetailsPage = () => {
                 * deleted by {post.edited_by} on {post.updated_at}
               </div>
             )}
-            <div className="post-card-comments">
-              <i className="fa-regular fa-message"></i> {post.comments?.length}{" "}
-              Comments
+            <div className="flex-row space-between">
+              <div className="post-card-comments">
+                <i className="fa-regular fa-message"></i>{" "}
+                {post.comments?.length} Comments
+              </div>
+              {Object.values(post).length > 0 && (
+                <LikeButtonsModal post={post} page="details" />
+              )}
             </div>
             <div className="comment-component-container">
               {Object.values(post).length > 0 &&
