@@ -80,6 +80,7 @@ const CreateCommunityForm = () => {
             type="text"
             name="header"
             id="new-header"
+            maxlength="60"
             placeholder="Community Header*"
             onChange={updateHeader}
             value={header}
@@ -96,6 +97,7 @@ const CreateCommunityForm = () => {
             type="text"
             name="name"
             placeholder="community_name*"
+            maxlength="50"
             onChange={updateName}
             value={name}
           ></input>

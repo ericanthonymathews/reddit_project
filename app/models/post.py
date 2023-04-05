@@ -27,6 +27,9 @@ class Post(db.Model):
     votes = db.relationship("Vote", back_populates="post")
 
     def to_dict(self):
+        total = 0
+        for vote in self.votes:
+            total += vote.value
         return {
             'id': self.id,
             'user_id': self.user_id,
@@ -36,6 +39,7 @@ class Post(db.Model):
             'community_name': self.community.name,
             "comments": [com.to_dict() for com in self.comments],
             "votes": [vote.to_dict() for vote in self.votes],
+            "total": total,
             'title': self.title,
             'body': self.body,
             'is_deleted': self.is_deleted,
