@@ -8,6 +8,7 @@ const SignUpForm = () => {
   const [emailErrors, setEmailErrors] = useState([]);
   const [passwordErrors, setPasswordErrors] = useState([]);
   const [usernameErrors, setUsernameErrors] = useState([]);
+  const [repeatPasswordErrors, setRepeatPasswordErrors] = useState([]);
   // const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -18,32 +19,39 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
-      if (data) {
-        const eErrors = [];
-        const pErrors = [];
-        const uErrors = [];
-        data.forEach((error) => {
-          let fieldsAndErrors = error.split(":");
-          if (fieldsAndErrors[0] === "email ") {
-            eErrors.push(fieldsAndErrors[1]);
-          }
-          if (fieldsAndErrors[0] === "password ") {
-            pErrors.push(fieldsAndErrors[1]);
-          }
-          if (fieldsAndErrors[0] === "username ") {
-            uErrors.push(fieldsAndErrors[1]);
-          }
-        });
-        setEmailErrors(eErrors);
-        setPasswordErrors(pErrors);
-        setUsernameErrors(uErrors);
-        // setErrors(data);
-      }
-    } else {
-      setPasswordErrors(["Passwords must match"]);
+    // if (password === repeatPassword) {
+    const data = await dispatch(
+      signUp(username, email, password, repeatPassword)
+    );
+    if (data) {
+      const eErrors = [];
+      const pErrors = [];
+      const uErrors = [];
+      const rErrors = [];
+      data.forEach((error) => {
+        let fieldsAndErrors = error.split(":");
+        if (fieldsAndErrors[0] === "email ") {
+          eErrors.push(fieldsAndErrors[1]);
+        }
+        if (fieldsAndErrors[0] === "password ") {
+          pErrors.push(fieldsAndErrors[1]);
+        }
+        if (fieldsAndErrors[0] === "username ") {
+          uErrors.push(fieldsAndErrors[1]);
+        }
+        if (fieldsAndErrors[0] === "repeat_password") {
+          rErrors.push(fieldsAndErrors[1]);
+        }
+      });
+      setEmailErrors(eErrors);
+      setPasswordErrors(pErrors);
+      setUsernameErrors(uErrors);
+      setRepeatPasswordErrors(rErrors);
+      // setErrors(data);
     }
+    // } else {
+    //   setPasswordErrors(["Passwords must match"]);
+    // }
   };
 
   const updateUsername = (e) => {
@@ -126,6 +134,13 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
+        <div>
+          {repeatPasswordErrors.map((error, ind) => (
+            <div key={`repeat-password-${ind}`} className="error-text">
+              {error}
+            </div>
+          ))}
+        </div>
         <input
           className="input-small"
           type="password"
@@ -133,7 +148,6 @@ const SignUpForm = () => {
           name="repeat_password"
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          required={true}
         ></input>
       </div>
       <button type="submit" className="single-btn-btn">

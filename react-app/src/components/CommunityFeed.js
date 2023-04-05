@@ -65,6 +65,8 @@ const CommunityFeed = () => {
       setHeaderErrors(hErrors);
       setAboutErrors(aErrors);
     } else {
+      setHeaderErrors([]);
+      setAboutErrors([]);
       dispatch(getCommunityThunk(communityId));
       setShowEdit(false);
     }
@@ -116,6 +118,7 @@ const CommunityFeed = () => {
                         name="header"
                         id="new-header"
                         placeholder="Community Header*"
+                        maxlength="60"
                         onChange={updateHeader}
                         value={header}
                       ></input>

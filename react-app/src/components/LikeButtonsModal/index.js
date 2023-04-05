@@ -79,7 +79,7 @@ function LikeButtonsModal({ post, page }) {
         <button onClick={upvote} className="nav-btn-btn">
           Upvote
         </button>
-        <div className="margin1em gry">{post.votes.length}</div>
+        <div className="margin1em gry">{post.total}</div>
         <button onClick={downvote} className="nav-btn-btn">
           Downvote
         </button>
@@ -96,7 +96,7 @@ function LikeButtonsModal({ post, page }) {
         <button onClick={upvote} className="nav-btn-btn">
           Upvote
         </button>
-        <div className="margin1em gry">{post.votes.length}</div>
+        <div className="margin1em gry">{post.total}</div>
         <button onClick={downvote} className="nav-btn-btn red">
           Downvote
         </button>
@@ -113,7 +113,7 @@ function LikeButtonsModal({ post, page }) {
         <button onClick={upvote} className="nav-btn-btn red">
           Upvote
         </button>
-        <div className="margin1em gry">{post.votes.length}</div>
+        <div className="margin1em gry">{post.total}</div>
         <button onClick={downvote} className="nav-btn-btn">
           Downvote
         </button>

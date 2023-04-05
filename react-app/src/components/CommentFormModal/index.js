@@ -29,6 +29,7 @@ function CommentForm() {
         });
         setErrors(dErrors);
       } else {
+        setErrors([]);
         setDescription("");
       }
     }
