@@ -22,7 +22,7 @@ const Feed = () => {
           />
         ))}
         <div id="feed-selector">
-          <select id="cars" name="cars">
+          <select id="feed-type" name="feed-type">
             <option value="new" selected>
               New
             </option>
