@@ -6,9 +6,10 @@ from app.models import Community
 
 
 def no_spaces_in_name(form, field):
+
     name = field.data
     if ' ' in name:
-        raise ValidationError('Username can\'t contain spaces.')
+        raise ValidationError("Username can't contain spaces.")
 
 
 def name_exists(form, field):
