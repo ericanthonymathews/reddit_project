@@ -19,9 +19,17 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @auth_routes.route('/')
-def authenticate():
+def authenticate() -> dict:
     """
-    Authenticates a user.
+     Authenticates a user.
+
+    Returns:
+        dict: {
+            'id': 123,
+            'username': 'someperson2',
+            'email': 'realperson@gmail.com',
+            'is_deleted': False,
+        }
     """
     if current_user.is_authenticated:
         return current_user.to_dict()

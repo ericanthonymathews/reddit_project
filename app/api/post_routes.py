@@ -11,13 +11,21 @@ post_routes = Blueprint('posts', __name__)
 # get all posts
 
 
-@post_routes.route('/')
-def posts():
-    posts = Post.query.all()
-    if posts:
-        return {"posts": [post.to_dict() for post in posts]}
-    else:
-        return {"posts": []}
+@post_routes.route('/<string:type>')
+def posts(type):
+    if type == 'new':
+        posts = Post.query.all()
+        if posts:
+            return {"posts": [post.to_dict() for post in posts]}
+        else:
+            return {"posts": []}
+    elif type == 'popular':
+        posts = Post.query.order_by().all()
+        if posts:
+            unsorted_posts_by_popularity = [post.to_dict() for post in posts]
+            return {"posts": [post.to_dict() for post in posts]}
+        else:
+            return {"posts": []}
 
 # get post by id
 
@@ -29,6 +37,7 @@ def post(id):
         return post.to_dict()
     else:
         return {}
+
 
 @post_routes.route("/<int:id>", methods=["POST"])
 @login_required

@@ -21,7 +21,6 @@ function CommentForm() {
     } else {
       const data = await dispatch(addCommentThunk(postId, description));
       if (data) {
-        console.log("~~~~~~~~~~~~~~~~~~~~DATA", data);
         const dErrors = [];
         data.forEach((error) => {
           let fieldsAndErrors = error.split(":");

@@ -16,7 +16,6 @@ const CreateCommunityForm = () => {
 
   const createCommunity = async (e) => {
     e.preventDefault();
-    console.log(name, header, about);
     const data = await dispatch(createNewCommunityThunk(name, header, about));
     if (typeof data !== "number") {
       const hErrors = [];
