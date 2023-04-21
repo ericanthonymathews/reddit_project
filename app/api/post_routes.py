@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from app.forms import EditPostForm, AddCommentForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from datetime import datetime
+from operator import itemgetter
 
 
 post_routes = Blueprint('posts', __name__)
@@ -12,7 +13,7 @@ post_routes = Blueprint('posts', __name__)
 
 
 @post_routes.route('/<string:type>')
-def posts(type):
+def get_posts(type):
     if type == 'new':
         posts = Post.query.all()
         if posts:
@@ -20,10 +21,14 @@ def posts(type):
         else:
             return {"posts": []}
     elif type == 'popular':
-        posts = Post.query.order_by().all()
+        posts = Post.query.all()
         if posts:
-            unsorted_posts_by_popularity = [post.to_dict() for post in posts]
-            return {"posts": [post.to_dict() for post in posts]}
+            posts_by_popularity = [post.to_dict() for post in posts]
+
+            new = sorted(
+                posts_by_popularity, key=itemgetter('total'))
+            print(new)
+            return {"posts": new}
         else:
             return {"posts": []}
 

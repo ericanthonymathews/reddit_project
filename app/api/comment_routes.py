@@ -1,9 +1,11 @@
-from flask import Blueprint, jsonify, request
-from app.models import db, Comment, Post
-from flask_login import login_required, current_user
-from app.forms import EditCommentForm
-from app.api.auth_routes import validation_errors_to_error_messages
 from datetime import datetime
+
+from flask import Blueprint, jsonify, request
+from flask_login import current_user, login_required
+
+from app.api.auth_routes import validation_errors_to_error_messages
+from app.forms import EditCommentForm
+from app.models import Comment, Post, db
 
 comment_routes = Blueprint('comments', __name__)
 

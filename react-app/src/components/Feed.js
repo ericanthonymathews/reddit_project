@@ -33,7 +33,7 @@ const Feed = () => {
             <option value="new" selected>
               New
             </option>
-            <option value="popular">Popular</option>
+            {/* <option value="popular">Popular</option> */}
           </select>
         </div>
       </div>
