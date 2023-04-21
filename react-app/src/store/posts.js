@@ -71,8 +71,8 @@ export const clearSinglePost = () => ({
 });
 
 // THUNK ACTION CREATOR
-export const getAllPostsThunk = () => async (dispatch) => {
-  const response = await fetch("/api/posts/");
+export const getAllPostsThunk = (feedType) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${feedType}`);
   if (response.ok) {
     const data = await response.json();
     await dispatch(loadPosts(data.posts));

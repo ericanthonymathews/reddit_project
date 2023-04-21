@@ -1,8 +1,8 @@
-from flask import Blueprint, jsonify, session, request
+from flask import Blueprint, jsonify, request, session
+from flask_login import current_user, login_required, login_user, logout_user
+
+from app.forms import LoginForm, SignUpForm
 from app.models import User, db
-from app.forms import LoginForm
-from app.forms import SignUpForm
-from flask_login import current_user, login_user, logout_user, login_required
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -19,9 +19,17 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @auth_routes.route('/')
-def authenticate():
+def authenticate() -> dict:
     """
-    Authenticates a user.
+     Authenticates a user.
+
+    Returns:
+        dict: {
+            'id': 123,
+            'username': 'someperson2',
+            'email': 'realperson@gmail.com',
+            'is_deleted': False,
+        }
     """
     if current_user.is_authenticated:
         return current_user.to_dict()

@@ -548,3 +548,25 @@ footer {
 #crt-cmm-btn:hover {
   text-decoration: underline;
 }
+
+#feed-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  width: 45vw;
+  height: 4vw;
+  margin: 1em;
+  margin-left: 8em;
+  padding-left: 0.5em;
+  background-color: #1A1A1B;
+  border: #56565a 1px solid;
+  border-radius: 0.1em;
+}
+
+#feed-type{
+  background-color: #1A1A1B;
+  color: whitesmoke;
+  border: #56565a 1px solid;
+  border-radius: 0.1em;
+}

@@ -1,9 +1,11 @@
-from flask import Blueprint, jsonify, request
-from app.models import db, Post, Community
-from app.forms import AddPostForm, EditPostForm, AddCommunityForm, EditCommunityForm
-from flask_login import login_required, current_user
-from app.api.auth_routes import validation_errors_to_error_messages
 from datetime import datetime
+
+from flask import Blueprint, jsonify, request
+from flask_login import current_user, login_required
+
+from app.api.auth_routes import validation_errors_to_error_messages
+from app.forms import AddCommunityForm, AddPostForm, EditCommunityForm, EditPostForm
+from app.models import Community, Post, db
 
 community_routes = Blueprint('communities', __name__)
 

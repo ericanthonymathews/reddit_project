@@ -22,13 +22,12 @@ def username_exists(form, field):
 
 def no_spaces_in_username(form, field):
     username = field.data
-    if (' ' in username) == True:
-        raise ValidationError('Username can\'t contain spaces.')
+    if ' ' in username:
+        raise ValidationError("Username can't contain spaces.")
 
 
 class SignUpForm(FlaskForm):
-    username = StringField(
-        'username', validators=[DataRequired(), username_exists, no_spaces_in_username])
+    username = StringField('username', validators=[DataRequired(), username_exists, no_spaces_in_username])
     email = StringField('email', validators=[DataRequired(), Email(), user_exists])
     password = StringField('password', validators=[DataRequired(), EqualTo('repeat_password', message='Passwords must match')])
     repeat_password = StringField('repeat_password', validators=[DataRequired()])
