@@ -28,14 +28,14 @@ const Feed = () => {
             key={`feed-postcard-${post.id}`}
           />
         ))}
-        <div id="feed-selector">
+        {/* <div id="feed-selector">
           <select id="feed-type" name="feed-type" onChange={changeFeed}>
             <option value="new" selected>
               New
             </option>
-            {/* <option value="popular">Popular</option> */}
+            <option value="popular">Popular</option>
           </select>
-        </div>
+        </div> */}
       </div>
       <PopularCommunities />
       <div className="filler" />
