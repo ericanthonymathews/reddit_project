@@ -14,6 +14,11 @@ community_routes = Blueprint('communities', __name__)
 
 @community_routes.route('/')
 def communities():
+    """Returns all communities available
+
+    Returns:
+        dict: all communities
+    """
     communities = Community.query.all()
     if communities:
         return {"communities": [community.to_dict() for community in communities]}
