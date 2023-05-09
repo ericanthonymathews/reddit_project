@@ -40,10 +40,10 @@ def delete_post_comment(id):
   """Removes the comment description and returns the deleted post or returns errors
 
   Args:
-      id (_type_): number
+      id (number): id of comment to be deleted
 
   Returns:
-      _type_: dict
+      dict: comment with deleted description column
   """
 
     form = EditCommentForm()
