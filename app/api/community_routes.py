@@ -27,10 +27,15 @@ def communities():
 
 # add a single community
 
+
 @community_routes.route('/', methods=["POST"])
 @login_required
 def add_community():
+    """Adds a single community to the database and returns the new community or errors out and returns errors
 
+    Returns:
+        dict: new community
+    """
     form = AddCommunityForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -58,6 +63,8 @@ def community_by_id(id):
         return {}
 
 # edit a community by id
+
+
 @community_routes.route('/<int:id>', methods=["PUT"])
 def edit_community(id):
 
@@ -65,9 +72,9 @@ def edit_community(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         community = Community.query.get(id)
-        community.header=form.data['header']
-        community.about=form.data['about']
-        community.edited_by=current_user.username
+        community.header = form.data['header']
+        community.about = form.data['about']
+        community.edited_by = current_user.username
         community.updated_at = datetime.now()
         db.session.commit()
         return community.to_dict()
