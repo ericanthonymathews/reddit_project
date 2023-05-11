@@ -56,6 +56,14 @@ def add_community():
 
 @community_routes.route('/<int:id>')
 def community_by_id(id):
+    """Returns the information for a single community or an empty dictionary if the community doesn't exist
+
+    Args:
+        id (number): id of single community
+
+    Returns:
+        dict: information for one community
+    """
     community = Community.query.get(id)
     if community:
         return community.to_dict()
