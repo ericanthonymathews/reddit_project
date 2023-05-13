@@ -75,7 +75,14 @@ def community_by_id(id):
 
 @community_routes.route('/<int:id>', methods=["PUT"])
 def edit_community(id):
+    """Edits and returns the community or returns the error and a 401
 
+    Args:
+        id (number): id of the community
+
+    Returns:
+        dict: edited single community
+    """
     form = EditCommunityForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
