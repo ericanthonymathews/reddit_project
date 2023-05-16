@@ -124,6 +124,14 @@ def add_post(community_id):
 
 @community_routes.route('/<int:id>/posts')
 def posts_by_id(id):
+    """Takes the id of a community and returns the posts for that community
+
+    Args:
+        id (number): id of single community
+
+    Returns:
+       dict: all the posts for the single community
+    """
     posts = Post.query.filter_by(community_id=id).all()
     if posts:
         return {"posts": [post.to_dict() for post in posts]}
