@@ -14,6 +14,14 @@ post_routes = Blueprint('posts', __name__)
 
 @post_routes.route('/<string:type>')
 def get_posts(type):
+    """Takes in a type and returns all posts according to type value
+
+    Args:
+        type (string): short word description for the sorted posts
+
+    Returns:
+        dict: all posts
+    """
     if type == 'new':
         posts = Post.query.all()
         if posts:
@@ -27,7 +35,6 @@ def get_posts(type):
 
             new = sorted(
                 posts_by_popularity, key=itemgetter('total'))
-            print(new)
             return {"posts": new}
         else:
             return {"posts": []}
