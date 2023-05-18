@@ -44,6 +44,14 @@ def get_posts(type):
 
 @post_routes.route('/<int:id>')
 def post(id):
+    """Takes an id number and returns the post associated
+
+    Args:
+        id (number): id of the post
+
+    Returns:
+        dict: All the related post information
+    """
     post = Post.query.get(id)
     if post:
         return post.to_dict()
