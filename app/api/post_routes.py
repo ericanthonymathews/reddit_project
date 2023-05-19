@@ -62,7 +62,14 @@ def post(id):
 @post_routes.route("/<int:id>", methods=["POST"])
 @login_required
 def add_post_comment(id):
+    """Takes the id of the post as well as form data, creates a comment for the post, and returns the updated post or returns an error
 
+    Args:
+        id (number): id of the post to be commented on
+
+    Returns:
+        dict: the updated post data containing the comment
+    """
     form = AddCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
