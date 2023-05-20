@@ -88,7 +88,14 @@ def add_post_comment(id):
 @post_routes.route("/<int:id>", methods=["PUT"])
 @login_required
 def edit_post(id):
+    """Takes the id of a post as well as form data and returns the edited post or the error
 
+    Args:
+        id (number): id of the post to be edited
+
+    Returns:
+        dict: the updated post information
+    """
     form = EditPostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
