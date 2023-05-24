@@ -130,7 +130,7 @@ def posts_by_id(id):
         id (number): id of single community
 
     Returns:
-       dict: all the posts for the single community
+       list: post dictionaries for the single community
     """
     posts = Post.query.filter_by(community_id=id).all()
     if posts:
@@ -142,8 +142,14 @@ def posts_by_id(id):
 @community_routes.route("/<int:community_id>/posts/<int:id>", methods=["PUT"])
 @login_required
 def edit_post(community_id, id):
-    """
-    Edits a Post and returns the edited post
+    """Edits a Post and returns the edited post
+
+    Args:
+        community_id (number): id for the community
+        id (number): id for the post
+
+    Returns:
+        dictionary: edited post details
     """
     form = EditPostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
