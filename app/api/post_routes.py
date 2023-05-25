@@ -20,7 +20,7 @@ def get_posts(type):
         type (string): short word description for the sorted posts
 
     Returns:
-        dict: all posts
+        list: all post dictionaries
     """
     if type == 'new':
         posts = Post.query.all()
@@ -44,13 +44,13 @@ def get_posts(type):
 
 @post_routes.route('/<int:id>')
 def post(id):
-    """Takes an id number and returns the post associated
+    """Takes a post id  and returns the post dictionary
 
     Args:
         id (number): id of the post
 
     Returns:
-        dict: All the related post information
+        dict: single post dictionary
     """
     post = Post.query.get(id)
     if post:
@@ -62,7 +62,7 @@ def post(id):
 @post_routes.route("/<int:id>", methods=["POST"])
 @login_required
 def add_post_comment(id):
-    """Takes the id of the post as well as form data, creates a comment for the post, and returns the updated post or returns an error
+    """Takes the id of the post as well as form data, creates a comment for the post, and returns the updated post dictionary -  or returns an error
 
     Args:
         id (number): id of the post to be commented on
@@ -94,7 +94,7 @@ def edit_post(id):
         id (number): id of the post to be edited
 
     Returns:
-        dict: the updated post information
+        dict: the updated post dictionary
     """
     form = EditPostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
