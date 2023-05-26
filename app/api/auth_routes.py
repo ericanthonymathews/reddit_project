@@ -8,9 +8,15 @@ auth_routes = Blueprint('auth', __name__)
 
 
 def validation_errors_to_error_messages(validation_errors):
+    """Simple function that turns the WTForms validation errors into a simple list
+
+    Args:
+        validation_errors (dict): A dictionary containing a list of errors for each field. Empty if the form hasn’t been validated, or there were no errors.
+
+    Returns:
+        list: strings containing error info (field and error)
     """
-    Simple function that turns the WTForms validation errors into a simple list
-    """
+
     errorMessages = []
     for field in validation_errors:
         for error in validation_errors[field]:
