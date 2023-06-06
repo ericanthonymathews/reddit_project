@@ -72,8 +72,10 @@ def logout():
 
 @auth_routes.route('/signup', methods=['POST'])
 def sign_up():
-    """
-    Creates a new user and logs them in
+    """Creates a new user using WTForm data and logs them in
+
+    Returns:
+        dict: dictionary of new user created
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
