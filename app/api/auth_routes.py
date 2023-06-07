@@ -94,7 +94,9 @@ def sign_up():
 
 @auth_routes.route('/unauthorized')
 def unauthorized():
-    """
-    Returns unauthorized JSON when flask-login authentication fails
+    """Returns a string to be parsed when flask-login authentication fails
+
+    Returns:
+        list: string the indicates authorization issue
     """
     return {'errors': ['Unauthorized']}, 401
