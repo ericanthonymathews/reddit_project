@@ -13,6 +13,11 @@ vote_routes = Blueprint('votes', __name__)
 @vote_routes.route('/')
 @login_required
 def votes_by_user_id():
+    """Returns all the votes made by the user based on id
+
+    Returns:
+        list: vote dictionaries
+    """
     votes = Vote.query.filter_by(user_id=current_user.id).all()
     if votes:
         return {"votes": [vote.to_dict() for vote in votes]}
