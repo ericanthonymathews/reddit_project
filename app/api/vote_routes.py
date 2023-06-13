@@ -71,7 +71,14 @@ def edit_vote(id):
 @vote_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_vote(id):
+    """Deletes the vote and returns the id
 
+    Args:
+        id (number): id of the vote to be deleted
+
+    Returns:
+        number: id of the deleted vote
+    """
     vote = Vote.query.get(id)
     db.session.delete(vote)
     db.session.commit()
