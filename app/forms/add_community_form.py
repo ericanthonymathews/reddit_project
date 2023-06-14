@@ -19,7 +19,11 @@ def no_spaces_in_name(form, field):
 
 
 def name_exists(form, field):
-    # Checking if username is already in use
+    """Checks if the username has already been used
+
+    Raises:
+        ValidationError: Community name is already in use
+    """
     name = field.data
     community = Community.query.filter(Community.name == name).first()
     if community:
