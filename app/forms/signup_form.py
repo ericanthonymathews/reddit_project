@@ -5,7 +5,8 @@ from app.models import User
 
 
 def user_exists(form, field):
-    # Checking if user exists
+    """Checks if user email is already in use
+    """
     email = field.data
     user = User.query.filter(User.email == email).first()
     if user:
@@ -27,7 +28,11 @@ def no_spaces_in_username(form, field):
 
 
 class SignUpForm(FlaskForm):
-    username = StringField('username', validators=[DataRequired(), username_exists, no_spaces_in_username])
-    email = StringField('email', validators=[DataRequired(), Email(), user_exists])
-    password = StringField('password', validators=[DataRequired(), EqualTo('repeat_password', message='Passwords must match')])
-    repeat_password = StringField('repeat_password', validators=[DataRequired()])
+    username = StringField('username', validators=[
+                           DataRequired(), username_exists, no_spaces_in_username])
+    email = StringField('email', validators=[
+                        DataRequired(), Email(), user_exists])
+    password = StringField('password', validators=[DataRequired(), EqualTo(
+        'repeat_password', message='Passwords must match')])
+    repeat_password = StringField(
+        'repeat_password', validators=[DataRequired()])
