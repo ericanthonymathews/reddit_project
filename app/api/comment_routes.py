@@ -21,31 +21,30 @@ def edit_post_comment(id):
     Returns:
         _type_: dict
     """
-     form = EditCommentForm()
-      form['csrf_token'].data = request.cookies['csrf_token']
-       if form.validate_on_submit():
-            comment = Comment.query.get(id)
-            comment.edited_by = form.data['edited_by']
-            comment.description = form.data['description']
-            comment.updated_at = datetime.now()
-            db.session.commit()
-            updated_post = Post.query.get(comment.post_id)
-            return updated_post.to_dict()
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    form = EditCommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        comment = Comment.query.get(id)
+        comment.edited_by = form.data['edited_by']
+        comment.description = form.data['description']
+        comment.updated_at = datetime.now()
+        db.session.commit()
+        updated_post = Post.query.get(comment.post_id)
+        return updated_post.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @comment_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_post_comment(id):
-  """Removes the comment description and returns the deleted post or returns errors
+    """Removes the comment description and returns the deleted post or returns errors
 
-  Args:
-      id (number): id of comment to be deleted
+    Args:
+        id (number): id of comment to be deleted
 
-  Returns:
-      dict: comment with deleted description column
-  """
-
+    Returns:
+        dict: comment with deleted description column
+    """
     form = EditCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
